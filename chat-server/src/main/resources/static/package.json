@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "bootstrap": "^4.0.0",
+    "jquery": "^3.3.1",
+    "sockjs": "^0.3.19",
+    "stomp": "^0.1.1"
+  }
+}
