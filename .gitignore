@@ -40,5 +40,12 @@
 # Backup entities generated with doctrine:generate:entities command
 **/Entity/*~
 
+<<<<<<< HEAD
 # Node modules in web-client
 /web-client-vue/node_modules
+=======
+
+/chat-server/target
+/chat-server/.idea
+/chat-server/chat.iml
+>>>>>>> 0abc8c018fc755b51cb44d1df404b697325a4025
