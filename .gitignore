@@ -39,3 +39,8 @@
 
 # Backup entities generated with doctrine:generate:entities command
 **/Entity/*~
+
+
+/chat-server/target
+/chat-server/.idea
+/chat-server/chat.iml
