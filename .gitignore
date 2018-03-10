@@ -39,3 +39,6 @@
 
 # Backup entities generated with doctrine:generate:entities command
 **/Entity/*~
+
+# Node modules in web-client
+/web-client-vue/node_modules
