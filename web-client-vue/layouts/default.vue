@@ -10,6 +10,7 @@
         <v-btn flat color="primary" nuxt to="/pricing">PRICING</v-btn>
         <v-btn flat color="primary" nuxt to="/about">ABOUT</v-btn>
         <v-btn flat color="primary" nuxt to="/login">LOGIN</v-btn>
+        <v-btn flat color="primary" nuxt to="/panel">PANEL</v-btn>
     </v-toolbar>
     <v-content>
       <v-container>
