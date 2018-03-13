@@ -1,5 +1,6 @@
 <template>
     <v-flex xs3 order-xs1 class="scrollable the-user-list">
+      <TheUserSearchBar />
       <UserCard 
       v-for="(user,index) in getUserList"
       :key="index"
@@ -22,6 +23,7 @@
 
 <script>
 import UserCard from './user-list/UserCard'
+import TheUserSearchBar from './user-list/TheUserSearchBar'
 import { mapGetters } from 'vuex'
 export default {
   computed: {
@@ -46,7 +48,8 @@ export default {
     }
   },
   components: {
-    UserCard
+    UserCard,
+    TheUserSearchBar
   }
 }
 </script>
