@@ -15,9 +15,12 @@
 
 <style scoped>
  .the-user-list{
-   background: red;
-   height: 90vh;
-   overflow-y: auto
+   background: #424242;
+   height: 80vh;
+   overflow-y: auto;
+   border: solid 1px #eeeeee0d;
+   border-radius: 5px;
+   box-shadow: 1px 1px 3px 0px rgb(133, 133, 133);
  }
 </style>
 

@@ -1,5 +1,5 @@
 <template>
-  <v-layout row>
+  <v-layout row mt-4> 
     <TheUserList />
     <TheChat />
     <TheUserInfo />
@@ -21,3 +21,4 @@ export default {
   }
 }
 </script>
+
