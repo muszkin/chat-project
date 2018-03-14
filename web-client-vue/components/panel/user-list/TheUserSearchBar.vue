@@ -21,7 +21,7 @@
    .user-searchbar{
     color: #ffffff;
     background-color: #424242;
-    border: 1px solid rgb(133, 133, 133);
+    border-top: 1px solid rgb(133, 133, 133);
     border-radius: 5px;
     margin: 0px 1px;
    }

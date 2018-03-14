@@ -1,5 +1,6 @@
 <template>
     <v-flex xs3 order-xs1 class="scrollable the-user-list">
+      <TheNavigation />
       <TheUserSearchBar />
       <UserCard 
       v-for="(user,index) in getUserList"
@@ -9,6 +10,7 @@
       :messagesCount="user.messagesCount"
       :lastMessage="user.lastMessage"
       :imageSrc="user.imageSrc"
+      :lastSeen="user.lastSeen"
       />
     </v-flex>
 </template>
@@ -27,6 +29,7 @@
 <script>
 import UserCard from './user-list/UserCard'
 import TheUserSearchBar from './user-list/TheUserSearchBar'
+import TheNavigation from './user-list/TheNavigation'
 import { mapGetters } from 'vuex'
 export default {
   computed: {
@@ -37,22 +40,10 @@ export default {
   mounted () {
     console.log(this.getUserList)
   },
-  data () {
-    return {
-      userList: [
-        {
-          userName: 'Adam',
-          userSurname: 'Małecki',
-          messagesCount: 10,
-          lastMessage: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae inventore veniam illo veritatis quia.',
-          imageSrc: '/man.png'
-        }
-      ]
-    }
-  },
   components: {
     UserCard,
-    TheUserSearchBar
+    TheUserSearchBar,
+    TheNavigation
   }
 }
 </script>

@@ -5,7 +5,6 @@
     <TheUserInfo />
   </v-layout >
 
-
 </template>
 
 
@@ -21,4 +20,11 @@ export default {
   }
 }
 </script>
+
+<style>
+ .row {
+   position: relative;
+ }
+</style>
+
 

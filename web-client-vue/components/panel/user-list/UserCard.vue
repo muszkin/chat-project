@@ -17,7 +17,7 @@
                 <div class="user-details">
                   <h5>{{userName}} {{userSurname}}</h5>
                   <h6>{{ lastMessage }}</h6>
-                  <span class="last-seen">13 min</span>
+                  <span class="last-seen">{{lastSeen}}</span>
                 </div>
               </v-flex>
           </v-layout>
@@ -41,7 +41,7 @@
 .user-card{
   color: #ffffff;
   background-color: #424242;
-  border: 1px solid rgb(133, 133, 133);
+  border-top: 1px solid rgb(133, 133, 133);
   border-radius: 5px;
   margin: 0px 1px;
 }
@@ -74,7 +74,7 @@ span.msg-count {
   font-size: 13px;
   right: 0;
   border-radius: 40px;
-  padding: 2px 4px;
+  padding: 2px 6px;
   background: #ff5a5f
 }
 
