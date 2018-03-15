@@ -16,6 +16,7 @@ function connect() {
     var socket = new SockJS('http://localhost:8080/register');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
+        $("#welcome-form").show();
         setConnected(true);
         console.log('Connected: ' + frame);
         stompClient.subscribe('/topic/private', function (greeting) {
@@ -25,15 +26,22 @@ function connect() {
 }
 
 function disconnect() {
-    if (stompClient != null) {
+    if (stompClient !== null) {
         stompClient.disconnect();
     }
     setConnected(false);
     console.log("Disconnected");
+    $("#message-form").hide();
 }
 
 function sendName() {
     stompClient.send("/app/hello", {}, JSON.stringify({'name': $("#name").val()}));
+    $("#welcome-form").hide();
+    $("#message-form").show();
+}
+
+function sendMessage() {
+    stompClient.send("/app/chat", {}, JSON.stringify({'content': $("#message").val()}));
 }
 
 function showGreeting(message) {
@@ -44,8 +52,10 @@ $(function () {
     $("form").on('submit', function (e) {
         e.preventDefault();
     });
+    $("#welcome-form").hide();
     $( "#connect" ).click(function() { connect(); });
     $( "#disconnect" ).click(function() { disconnect(); });
     $( "#send" ).click(function() { sendName(); });
+    $( "#send-message" ).click(function() { sendMessage(); });
 });
 

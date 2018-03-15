@@ -1,13 +1,13 @@
 package com.chat.server.Message;
 
-public class GreetingMessage {
+public class ChatMessage {
 
   private String content;
 
-  public GreetingMessage() {
+  public ChatMessage() {
   }
 
-  public GreetingMessage(String content) {
+  public ChatMessage(String content) {
     this.content = content;
   }
 

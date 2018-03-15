@@ -1,6 +1,6 @@
 package com.chat.server.Controller;
 
-import com.chat.server.Message.GreetingMessage;
+import com.chat.server.Message.ChatMessage;
 import com.chat.server.Message.HelloMessage;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -11,16 +11,16 @@ public class ChatController {
 
   @MessageMapping("/hello")
   @SendTo("/topic/private")
-  public GreetingMessage hello(HelloMessage message) throws Exception {
-    Thread.sleep(1000); // simulated delay
-    return new GreetingMessage("Hello, " + message.getName() + "!");
+  public ChatMessage hello(HelloMessage message) throws Exception {
+    Thread.sleep(100); // simulated delay
+    return new ChatMessage("Hello, " + message.getName() + "!");
   }
 
   @MessageMapping("/chat")
   @SendTo("/topic/private")
-  public GreetingMessage chat(HelloMessage message) throws Exception {
-    Thread.sleep(1000); // simulated delay
-    return new GreetingMessage("You said: " + message.getName());
+  public ChatMessage chat(ChatMessage message) throws Exception {
+    Thread.sleep(100); // simulated delay
+    return new ChatMessage("You said: " + message.getContent());
   }
 
 }
