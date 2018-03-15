@@ -19,16 +19,24 @@
 
   <style scoped>
    .user-searchbar{
-         color: #0e0e0e;
-    background-color: #CFD8DC;
-    border: 1px solid #eeeeee;
-    position: relative;
+    color: #ffffff;
+    background-color: #424242;
+    border-top: 1px solid rgb(133, 133, 133);
+    border-radius: 5px;
+    margin: 0px 1px;
    }
 
+  .user-searchbar:hover .element-search input {
+    width: 80%;
+    transition: 0.2s all ease-in;
+  }
    .element-search input {
        background: #f6f7f8;
        padding: 2px 15px;
        border-radius: 50px;
+       transition: 0.2s all ease-in;
+       width: 50%;
+       color: #0e0e0e;
    }
    .element-search i {
        position: absolute;
@@ -39,7 +47,7 @@
    }
 
     .element-search i:hover {
-        transform: scale(1.5)
+        transform: scale(1.2)
     }
    
   </style>

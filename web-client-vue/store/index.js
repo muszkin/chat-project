@@ -2,137 +2,76 @@ export const state = () => ({
   sidebar: false,
   userList: [
     {
-      userName: 'Adam',
-      userSurname: 'Małecki',
+      userName: 'Cool',
+      userSurname: 'User',
       messagesCount: 10,
       lastMessage: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae inventore veniam illo veritatis quia.',
-      imageSrc: '/man.png'
+      imageSrc: '/man.png',
+      lastSeen: '2 hours'
     },
     {
-      userName: 'Adam',
-      userSurname: 'Małysz',
-      messagesCount: 0,
-      lastMessage: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae inventore veniam illo veritatis quia.',
-      imageSrc: '/logo.png'
-    },
-    {
-      userName: 'Adam',
-      userSurname: 'Małecki',
-      messagesCount: 10,
-      lastMessage: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae inventore veniam illo veritatis quia.',
-      imageSrc: '/man.png'
-    },
-    {
-      userName: 'Adam',
-      userSurname: 'Małysz',
-      messagesCount: 0,
-      lastMessage: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae inventore veniam illo veritatis quia.',
-      imageSrc: '/logo.png'
-    },
-    {
-      userName: 'Adam',
-      userSurname: 'Małecki',
-      messagesCount: 10,
-      lastMessage: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae inventore veniam illo veritatis quia.',
-      imageSrc: '/man.png'
-    },
-    {
-      userName: 'Adam',
-      userSurname: 'Małysz',
-      messagesCount: 0,
-      lastMessage: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae inventore veniam illo veritatis quia.',
-      imageSrc: '/logo.png'
-    },
-    {
-      userName: 'Adam',
-      userSurname: 'Małecki',
-      messagesCount: 10,
-      lastMessage: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae inventore veniam illo veritatis quia.',
-      imageSrc: '/man.png'
-    },
-    {
-      userName: 'Adam',
-      userSurname: 'Małysz',
-      messagesCount: 0,
-      lastMessage: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae inventore veniam illo veritatis quia.',
-      imageSrc: '/logo.png'
-    },
-    {
-      userName: 'Adam',
-      userSurname: 'Małecki',
-      messagesCount: 10,
-      lastMessage: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae inventore veniam illo veritatis quia.',
-      imageSrc: '/man.png'
-    },
-    {
-      userName: 'Adam',
-      userSurname: 'Małysz',
-      messagesCount: 0,
-      lastMessage: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae inventore veniam illo veritatis quia.',
-      imageSrc: '/logo.png'
-    },
-    {
-      userName: 'Adam',
-      userSurname: 'Małecki',
-      messagesCount: 10,
-      lastMessage: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae inventore veniam illo veritatis quia.',
-      imageSrc: '/man.png'
-    },
-    {
-      userName: 'Adam',
-      userSurname: 'Małysz',
-      messagesCount: 0,
-      lastMessage: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae inventore veniam illo veritatis quia.',
-      imageSrc: '/logo.png'
-    },
-    {
-      userName: 'Adam',
-      userSurname: 'Małecki',
-      messagesCount: 10,
-      lastMessage: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae inventore veniam illo veritatis quia.',
-      imageSrc: '/man.png'
-    },
-    {
-      userName: 'Adam',
-      userSurname: 'Małysz',
-      messagesCount: 0,
-      lastMessage: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae inventore veniam illo veritatis quia.',
-      imageSrc: '/logo.png'
-    },
-    {
-      userName: 'Adam',
-      userSurname: 'Małecki',
-      messagesCount: 10,
-      lastMessage: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae inventore veniam illo veritatis quia.',
-      imageSrc: '/man.png'
-    },
-    {
-      userName: 'Adam',
-      userSurname: 'Małysz',
-      messagesCount: 0,
-      lastMessage: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae inventore veniam illo veritatis quia.',
-      imageSrc: '/logo.png'
-    },
-    {
-      userName: 'Adam',
-      userSurname: 'Małecki',
-      messagesCount: 10,
-      lastMessage: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae inventore veniam illo veritatis quia.',
-      imageSrc: '/man.png'
-    },
-    {
-      userName: 'Adam',
-      userSurname: 'Małysz',
-      messagesCount: 0,
-      lastMessage: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae inventore veniam illo veritatis quia.',
-      imageSrc: '/logo.png'
-    },
-    {
-      userName: 'Pan',
-      userSurname: 'Kupujący',
+      userName: 'Super',
+      userSurname: 'User',
       messagesCount: 3,
       lastMessage: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae inventore veniam illo veritatis quia.',
-      imageSrc: '/v.png'
+      imageSrc: '/man.png',
+      lastSeen: '15 min'
+    },
+    {
+      userName: 'That',
+      userSurname: 'User',
+      messagesCount: 1,
+      lastMessage: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae inventore veniam illo veritatis quia.',
+      imageSrc: '/man.png',
+      lastSeen: 'Less than 1 min'
+    },
+    {
+      userName: 'Cool',
+      userSurname: 'User',
+      messagesCount: 10,
+      lastMessage: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae inventore veniam illo veritatis quia.',
+      imageSrc: '/man.png',
+      lastSeen: '2 hours'
+    },
+    {
+      userName: 'Super',
+      userSurname: 'User',
+      messagesCount: 3,
+      lastMessage: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae inventore veniam illo veritatis quia.',
+      imageSrc: '/man.png',
+      lastSeen: '15 min'
+    },
+    {
+      userName: 'That',
+      userSurname: 'User',
+      messagesCount: 1,
+      lastMessage: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae inventore veniam illo veritatis quia.',
+      imageSrc: '/man.png',
+      lastSeen: 'Less than 1 min'
+    },
+    {
+      userName: 'Cool',
+      userSurname: 'User',
+      messagesCount: 10,
+      lastMessage: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae inventore veniam illo veritatis quia.',
+      imageSrc: '/man.png',
+      lastSeen: '2 hours'
+    },
+    {
+      userName: 'Super',
+      userSurname: 'User',
+      messagesCount: 3,
+      lastMessage: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae inventore veniam illo veritatis quia.',
+      imageSrc: '/man.png',
+      lastSeen: '15 min'
+    },
+    {
+      userName: 'That',
+      userSurname: 'User',
+      messagesCount: 1,
+      lastMessage: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae inventore veniam illo veritatis quia.',
+      imageSrc: '/man.png',
+      lastSeen: 'Less than 1 min'
     }
   ]
 })

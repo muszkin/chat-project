@@ -4,19 +4,20 @@
       <v-card class="user-card">
         <v-container fluid grid-list-lg>
             <v-layout row>
-              <v-flex xs3>
+              <v-flex xs2 class="pic-block">
                 <v-card-media
                 class="user-pic"
                 :src="imageSrc"
                 height="50px"
                 contain
                 ></v-card-media>
+                <span v-if="!!messagesCount" class="msg-count">{{ messagesCount }}</span>
               </v-flex>
-              <v-flex xs9>
+              <v-flex xs10>
                 <div class="user-details">
                   <h5>{{userName}} {{userSurname}}</h5>
                   <h6>{{ lastMessage }}</h6>
-                  <span v-if="!!messagesCount" class="msg-count">{{ messagesCount }}</span>
+                  <span class="last-seen">{{lastSeen}}</span>
                 </div>
               </v-flex>
           </v-layout>
@@ -28,7 +29,7 @@
 
 <script>
   export default {
-    props: ['userName', 'userSurname', 'messagesCount', 'lastMessage', 'imageSrc']
+    props: ['userName', 'userSurname', 'messagesCount', 'lastMessage', 'imageSrc', 'lastSeen']
   }
 </script>
 
@@ -38,13 +39,16 @@
   background: #607D8B;
 }
 .user-card{
-  color: #0e0e0e;
-  background-color: #CFD8DC;
-  border: 1px solid #eeeeee;
+  color: #ffffff;
+  background-color: #424242;
+  border-top: 1px solid rgb(133, 133, 133);
+  border-radius: 5px;
+  margin: 0px 1px;
 }
 
 .user-card:hover{
-  background:#B0BEC5;
+  background:#4f4f4f;
+  /* color: #0e0e0e; */
   cursor: pointer;
 }
 
@@ -64,14 +68,14 @@
   text-overflow: ellipsis;
 }
 
-.user-details span.msg-count {
+span.msg-count {
   position: absolute;
   top: 0;
-  font-size: 12px;
+  font-size: 13px;
   right: 0;
-  border-radius: 20px;
-  padding: 0px 5px;
-  background: #90A4AE
+  border-radius: 40px;
+  padding: 2px 6px;
+  background: #ff5a5f
 }
 
 
@@ -80,6 +84,19 @@
   height: auto;
   border-radius: 50px;
   display: block;
+}
+
+.pic-block {
+  position: relative;
+}
+
+.last-seen {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 2px 10px;
+  border-radius: 20px;
+  background: #737373
 }
 </style>
 

@@ -1,10 +1,9 @@
 <template>
-  <v-layout row>
+  <v-layout row mt-4> 
     <TheUserList />
     <TheChat />
     <TheUserInfo />
   </v-layout >
-
 
 </template>
 
@@ -21,3 +20,11 @@ export default {
   }
 }
 </script>
+
+<style>
+ .row {
+   position: relative;
+ }
+</style>
+
+
