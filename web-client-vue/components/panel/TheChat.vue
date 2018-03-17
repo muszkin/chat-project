@@ -36,8 +36,8 @@
           </div>
         </div>
         <div class="message-box">
-          <textarea type="text" class="message-input" placeholder="Type message..."></textarea>
-          <button type="submit" class="message-submit">Send</button>
+          <textarea @keyup.enter="sendMessage" v-model="selfMessageContent" type="text" class="message-input" placeholder="Type message..."></textarea>
+          <button  @click="sendMessage" type="submit" class="message-submit">Send</button>
         </div>
       </div>
     </section>
@@ -53,8 +53,10 @@
     data () {
       return {
         messages: this.getMessages,
-        dupa: 'lel',
-        newMessage: {}
+        newMessage: {},
+        selfMessageContent: '',
+        socket: null,
+        stompClient: null
       }
     },
     components: {
@@ -70,17 +72,24 @@
         this.$store.commit('newMessage', val)
       }
     },
+    methods: {
+      sendMessage () {
+        console.log('wysyłąnko:' + this.selfMessageContent)
+        this.stompClient.send('/app/chat', {}, JSON.stringify({'content': this.selfMessageContent}))
+        this.selfMessageContent = ''
+      }
+    },
     mounted () {
       console.log(this.getMessages)
-      const socket = new SockJS('http://34.248.53.38:8080/register')
-      const stompClient = Stomp.over(socket)
-      stompClient.connect({}, (frame) => {
+      this.socket = new SockJS('http://34.248.53.38:8080/register')
+      this.stompClient = Stomp.over(this.socket)
+      this.stompClient.connect({}, (frame) => {
         const msg = {
           content: 'Connected to server',
           origin: 'server'
         }
         this.$store.commit('newMessage', msg)
-        stompClient.subscribe('/topic/private', (resp) => {
+        this.stompClient.subscribe('/topic/private', (resp) => {
           let jsonResp = JSON.parse(resp.body)
           this.newMessage = {
             content: jsonResp.content,
@@ -185,7 +194,7 @@ Messages
     flex: 1 1 auto;
     /*  color: rgba(255, 255, 255, .5);
   color: #fff;*/
-    overflow: hidden;
+    overflow: auto;
     position: relative;
     width: 100%;
   }
