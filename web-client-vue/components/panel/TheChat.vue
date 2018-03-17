@@ -50,6 +50,13 @@
   import Stomp from '@stomp/stompjs'
   import { mapGetters } from 'vuex'
   export default {
+    data () {
+      return {
+        messages: this.getMessages,
+        dupa: 'lel',
+        newMessage: {}
+      }
+    },
     components: {
       Message
     },
@@ -57,6 +64,11 @@
       ...mapGetters([
         'getMessages'
       ])
+    },
+    watch: {
+      newMessage (val) {
+        this.$store.commit('newMessage', val)
+      }
     },
     mounted () {
       console.log(this.getMessages)
@@ -69,7 +81,11 @@
         }
         this.$store.commit('newMessage', msg)
         stompClient.subscribe('/topic/private', (resp) => {
-          console.log('HALKOO' + resp.body)
+          let jsonResp = JSON.parse(resp.body)
+          this.newMessage = {
+            content: jsonResp.content,
+            origin: 'server'
+          }
         })
       })
     }
