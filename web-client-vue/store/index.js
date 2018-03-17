@@ -28,6 +28,9 @@ export const getters = {
   },
   getMessages (state) {
     return state.messages
+  },
+  getMessagesLength (state) {
+    return state.messages.length
   }
 }
 export const mutations = {

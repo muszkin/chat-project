@@ -30,6 +30,7 @@
             <Message 
               v-for="(message,index) in getMessages"
               :key="index"
+              :index = "index"
               :content = "message.content"
               :origin = "message.origin"
             />
@@ -70,13 +71,27 @@
     watch: {
       newMessage (val) {
         this.$store.commit('newMessage', val)
+        this.updateScroll()
       }
     },
     methods: {
       sendMessage () {
         console.log('wysyłąnko:' + this.selfMessageContent)
         this.stompClient.send('/app/chat', {}, JSON.stringify({'content': this.selfMessageContent}))
+        const msg = {
+          content: this.selfMessageContent,
+          origin: 'self'
+        }
+        this.$store.commit('newMessage', msg)
+        this.updateScroll()
         this.selfMessageContent = ''
+      },
+      updateScroll () {
+        const msgBox = document.querySelector('.messages')
+        const bigInt = 9999999999
+        setTimeout(() => {
+          msgBox.scrollTop = msgBox.scrollHeight + bigInt
+        }, 100)
       }
     },
     mounted () {
@@ -194,7 +209,8 @@ Messages
     flex: 1 1 auto;
     /*  color: rgba(255, 255, 255, .5);
   color: #fff;*/
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
     position: relative;
     width: 100%;
   }
@@ -276,9 +292,6 @@ Messages
     height: auto;
   }
 
-  .messages .message.message-personal .avatar {
-    left: 50px;
-  }
 
   .messages .message.message-personal {
     float: right;
@@ -421,7 +434,7 @@ Message Box
     height: 24px;
     margin: 0;
     padding-right: 20px;
-    width: 265px;
+    width: 90%;
     color: #444;
   }
 
