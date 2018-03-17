@@ -1,3 +1,4 @@
+export const strict = false
 export const state = () => ({
   sidebar: false,
   userList: [
@@ -8,80 +9,32 @@ export const state = () => ({
       lastMessage: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae inventore veniam illo veritatis quia.',
       imageSrc: '/man.png',
       lastSeen: '2 hours'
+    }
+  ],
+  messages: [
+    {
+      content: 'Welcome to our chat',
+      origin: 'server'
     },
     {
-      userName: 'Super',
-      userSurname: 'User',
-      messagesCount: 3,
-      lastMessage: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae inventore veniam illo veritatis quia.',
-      imageSrc: '/man.png',
-      lastSeen: '15 min'
-    },
-    {
-      userName: 'That',
-      userSurname: 'User',
-      messagesCount: 1,
-      lastMessage: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae inventore veniam illo veritatis quia.',
-      imageSrc: '/man.png',
-      lastSeen: 'Less than 1 min'
-    },
-    {
-      userName: 'Cool',
-      userSurname: 'User',
-      messagesCount: 10,
-      lastMessage: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae inventore veniam illo veritatis quia.',
-      imageSrc: '/man.png',
-      lastSeen: '2 hours'
-    },
-    {
-      userName: 'Super',
-      userSurname: 'User',
-      messagesCount: 3,
-      lastMessage: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae inventore veniam illo veritatis quia.',
-      imageSrc: '/man.png',
-      lastSeen: '15 min'
-    },
-    {
-      userName: 'That',
-      userSurname: 'User',
-      messagesCount: 1,
-      lastMessage: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae inventore veniam illo veritatis quia.',
-      imageSrc: '/man.png',
-      lastSeen: 'Less than 1 min'
-    },
-    {
-      userName: 'Cool',
-      userSurname: 'User',
-      messagesCount: 10,
-      lastMessage: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae inventore veniam illo veritatis quia.',
-      imageSrc: '/man.png',
-      lastSeen: '2 hours'
-    },
-    {
-      userName: 'Super',
-      userSurname: 'User',
-      messagesCount: 3,
-      lastMessage: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae inventore veniam illo veritatis quia.',
-      imageSrc: '/man.png',
-      lastSeen: '15 min'
-    },
-    {
-      userName: 'That',
-      userSurname: 'User',
-      messagesCount: 1,
-      lastMessage: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae inventore veniam illo veritatis quia.',
-      imageSrc: '/man.png',
-      lastSeen: 'Less than 1 min'
+      content: 'No elo',
+      origin: 'self'
     }
   ]
 })
 export const getters = {
   getUserList (state) {
     return state.userList
+  },
+  getMessages (state) {
+    return state.messages
   }
 }
 export const mutations = {
   toggleSidebar (state) {
     state.sidebar = !state.sidebar
+  },
+  newMessage (state, message) {
+    state.messages.push(message)
   }
 }

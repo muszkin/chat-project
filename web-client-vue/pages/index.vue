@@ -4,15 +4,15 @@
      
       <v-card class="card-centered">
          <div class="text-xs-center">
-            <img src="/golab.png" alt="Vuetify.js" class="mt-3 mb-1 logo" />
+            <img src="/logo.png" alt="Vuetify.js" class="mt-3 mb-1 logo" />
          </div>
-        <v-card-title class="headline text-xs-center">ePidgeon</v-card-title>
+        <v-card-title class="headline text-xs-center">Czat</v-card-title>
         <v-card-text>
-          <p>Odwiedzający stronę czekają na Twoje wsparcie</p>
-          <p>Czat to najszybsza forma komunikacji z klientem - jest znacznie szybszy niż e-mail i dużo bardziej efektywy niż telefon. Nie każ swoim klientom czekać!</p>
-          <h3 class="mt-3">Ten czat to sekret mojego sukcesu</h3>
+          <h1 class="text-xs-center">Super webscoket czacik </h1>
+          <br>
+          <h3 class="mt-3">Widać duże napracowanko</h3>
           <div class="text-xs-right">
-            <em><small>&mdash; Mr. Succes</small></em>
+            <em><small>&mdash; Użytkownik czatu</small></em>
           </div>
         </v-card-text>
         <v-card-actions >
