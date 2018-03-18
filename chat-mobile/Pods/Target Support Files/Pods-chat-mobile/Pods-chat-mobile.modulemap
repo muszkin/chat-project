@@ -1,0 +1,6 @@
+framework module Pods_chat_mobile {
+  umbrella header "Pods-chat-mobile-umbrella.h"
+
+  export *
+  module * { export * }
+}
