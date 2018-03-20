@@ -53,5 +53,5 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
   public boolean configureMessageConverters(List<MessageConverter> list) {
     return false;
   }
-
+  
 }
