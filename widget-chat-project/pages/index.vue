@@ -37,7 +37,7 @@
   body {
     background: linear-gradient(135deg, #044f48, #345093);
     background-size: cover;
-    background: #fff;
+    background: transparent;
     font-family: 'Avenir', 'Open Sans', sans-serif;
     font-size: 14px;
     line-height: 1.3;
