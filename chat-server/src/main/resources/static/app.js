@@ -19,7 +19,9 @@ function connect() {
         $("#welcome-form").show();
         setConnected(true);
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/private', function (greeting) {
+        var sessionId = socket._transport.url.split('/')[5];
+        console.log('Session id: ' + sessionId);
+        stompClient.subscribe('/topic/private/' + sessionId, function (greeting) {
             showGreeting(JSON.parse(greeting.body).content);
         });
     });
