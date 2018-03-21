@@ -23,7 +23,12 @@ public class ChatController {
   @MessageMapping("/chat")
   public void chat(ChatMessage message, SimpMessageHeaderAccessor headerAccessor) throws Exception {
     Thread.sleep(100); // simulated delay
-    messageSendingOperations.convertAndSend("/topic/private/" + headerAccessor.getSessionId(), new ChatMessage("<b>You</b>: " + message.getContent()));
+    
+// auth problem
+//    GoogleTranslateController polishToEnglishTranslator = new GoogleTranslateController("pl","en");
+//    String transaltedByGoogle = polishToEnglishTranslator.traslateString(message.getContent());
+            
+    messageSendingOperations.convertAndSend("/topic/private/" + headerAccessor.getSessionId(), new ChatMessage("<b>You</b>: " + message.getContent() ));
   }
 
 }
