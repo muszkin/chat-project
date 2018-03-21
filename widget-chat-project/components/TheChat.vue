@@ -3,11 +3,7 @@
     <div class="menu">
       <div class="items"><span>
         <a href="#" title="Minimize">&mdash;</a><br>
-    <!--     
-        <a href="">enter email</a><br>
-        <a href="">email transcript</a><br>-->
         <a href="#" title="End Chat">&#10005;</a>
-        
         </span>
       </div>
       <div class="button">...</div>
@@ -22,11 +18,21 @@
         <h2>RE/MAX</h2>
       </div>
       <div class="messages">
-        <div class="messages-content"></div>
+        <div class="messages-content">
+          <div class="messages-body">
+              <Message 
+                v-for="(message,index) in getMessages"
+                :key="index"
+                :index = "index"
+                :content = "message.content"
+                :origin = "message.origin"
+              />
+          </div>
+        </div>
       </div>
       <div class="message-box">
-        <textarea type="text" class="message-input" placeholder="Type message..."></textarea>
-        <button type="submit" class="message-submit">Send</button>
+        <textarea @keyup.enter="sendMessage" v-model="selfMessageContent" type="text" class="message-input" placeholder="Type message..."></textarea>
+        <button @click="sendMessage" type="submit" class="message-submit">Send</button>
       </div>
     </div>  
   </section>
@@ -34,14 +40,75 @@
 
 
 <script>
-import { mapGetters } from 'vuex'
-export default {
-  computed: {
-    ...mapGetters([
-      'getChatOpen'
-    ])
+  import Message from './Message.vue'
+  import SockJS from 'sockjs-client'
+  import Stomp from '@stomp/stompjs'
+  import { mapGetters } from 'vuex'
+  export default {
+    data () {
+      return {
+        messages: this.getMessages,
+        newMessage: {},
+        selfMessageContent: '',
+        socket: null,
+        stompClient: null
+      }
+    },
+    components: {
+      Message
+    },
+    computed: {
+      ...mapGetters([
+        'getMessages',
+        'getChatOpen'
+      ])
+    },
+    watch: {
+      newMessage (val) {
+        this.$store.commit('newMessage', val)
+        this.updateScroll()
+      }
+    },
+    methods: {
+      sendMessage () {
+        console.log('wysyłąnko:' + this.selfMessageContent)
+        this.stompClient.send('/app/chat', {}, JSON.stringify({'content': this.selfMessageContent}))
+        const msg = {
+          content: this.selfMessageContent,
+          origin: 'self'
+        }
+        this.$store.commit('newMessage', msg)
+        this.updateScroll()
+        this.selfMessageContent = ''
+      },
+      updateScroll () {
+        const msgBox = document.querySelector('.messages')
+        const bigInt = 9999999999
+        setTimeout(() => {
+          msgBox.scrollTop = msgBox.scrollHeight + bigInt
+        }, 100)
+      }
+    },
+    mounted () {
+      console.log(this.getMessages)
+      this.socket = new SockJS('http://34.248.53.38:8080/register')
+      this.stompClient = Stomp.over(this.socket)
+      this.stompClient.connect({}, (frame) => {
+        const msg = {
+          content: 'Connected to server',
+          origin: 'server'
+        }
+        this.$store.commit('newMessage', msg)
+        this.stompClient.subscribe('/topic/private', (resp) => {
+          let jsonResp = JSON.parse(resp.body)
+          this.newMessage = {
+            content: jsonResp.content,
+            origin: 'server'
+          }
+        })
+      })
+    }
   }
-}
 </script>
 
 
@@ -178,14 +245,6 @@ Messages
   right: 16px;
   font-size: 12px;
 }
-.messages .message::before {
-  /*  content: '';
-    position: absolute;
-    bottom: -6px;
-    border-top: 6px solid rgba(0, 0, 0, 0.1);
-    left: 0;
-    border-right: 7px solid transparent;*/
-}
 .messages .message .avatar {
   position: absolute;
   z-index: 1;
@@ -206,56 +265,32 @@ Messages
 .messages .message.message-personal {
   float: right;
   text-align: right;
-  /*      background: linear-gradient(120deg, #ddd, #eee);*/
   background: #fff;
   border: 1px solid #ccc;
   border-radius: 20px 20px 0 20px;
 }
-.messages .message.message-personal::before {
-  /*
-      content:"";
-  border-color:#4A90E2 transparent;
-    width:0;
-    border-style:solid;*/
- /*
- left: auto;
- right: 0;
- border-right: none;
-border-left: 8px solid transparent;
- border-top: 9px solid #fff;
- 
- bottom: -8px;*/
-}
+
 .messages .message:last-child {
   margin-bottom: 30px;
 }
 .messages .message.new {
-  -webkit-transform: scale(0);
-          transform: scale(0);
-  -webkit-transform-origin: 0 0;
-          transform-origin: 0 0;
-  -webkit-animation: bounce 500ms linear both;
-          animation: bounce 500ms linear both;
+  transform: scale(0);
+  transform-origin: 0 0;
+  animation: bounce 500ms linear both;
 }
 .messages .message.loading::before {
   position: relative;
-  /*  top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);*/
   content: '';
   display: block;
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  /*  background: rgba(255, 255, 255, .5);*/
   background: #888;
   z-index: 2;
   margin-top: 4px;
-  -webkit-animation: ball 0.45s cubic-bezier(0, 0, 0.15, 1) alternate infinite;
-          animation: ball 0.45s cubic-bezier(0, 0, 0.15, 1) alternate infinite;
+  animation: ball 0.45s cubic-bezier(0, 0, 0.15, 1) alternate infinite;
   border: none;
-  -webkit-animation-delay: .15s;
-          animation-delay: .15s;
+  animation-delay: .15s;
 }
 .messages .message.loading span {
   display: block;
@@ -266,58 +301,40 @@ border-left: 8px solid transparent;
 }
 .messages .message.loading span::before {
   position: relative;
-  /*  top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);*/
   content: '';
   display: block;
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  /*  background: rgba(255, 255, 255, .5);*/
   background: #888;
   z-index: 2;
   margin-top: 4px;
-  -webkit-animation: ball 0.45s cubic-bezier(0, 0, 0.15, 1) alternate infinite;
-          animation: ball 0.45s cubic-bezier(0, 0, 0.15, 1) alternate infinite;
+  animation: ball 0.45s cubic-bezier(0, 0, 0.15, 1) alternate infinite;
   margin-left: -7px;
 }
 .messages .message.loading span::after {
   position: relative;
-  /*  top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);*/
   content: '';
   display: block;
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  /*  background: rgba(255, 255, 255, .5);*/
   background: #888;
   z-index: 2;
   margin-top: 4px;
-  -webkit-animation: ball 0.45s cubic-bezier(0, 0, 0.15, 1) alternate infinite;
-          animation: ball 0.45s cubic-bezier(0, 0, 0.15, 1) alternate infinite;
+  animation: ball 0.45s cubic-bezier(0, 0, 0.15, 1) alternate infinite;
   margin-left: 7px;
-  -webkit-animation-delay: .3s;
-          animation-delay: .3s;
+  animation-delay: .3s;
 }
 
 /*--------------------
 Message Box
 --------------------*/
 .message-box {
-  -webkit-box-flex: 0;
-      -ms-flex: 0 1 42px;
-          flex: 0 1 42px;
+  flex: 0 1 42px;
   width: 90%;
   background: #fff;
   margin: 2px auto;
-  /*-webkit-box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.4);
-  -moz-box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.4);
-  box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.4);*/
-  /*background: rgba(0, 0, 0, 0.3);
-    border-top:1px solid #e3e3e3;*/
   padding: 10px;
   position: relative;
   border-radius: 20px;
@@ -329,7 +346,6 @@ Message Box
   border: none;
   outline: none !important;
   resize: none;
-  /* color: rgba(255, 255, 255, .8);*/
   font-size: 15px;
   height: 24px;
   margin: 0;
@@ -347,7 +363,6 @@ Message Box
   right: 10px;
   color: #4A90E2;
   border: none;
-  /* background: #c29d5f;*/
   background: #fff;
   font-size: 12px;
   text-transform: uppercase;
@@ -525,8 +540,7 @@ Bounce
   bottom: 80px;
   margin: auto;
   z-index: 10;
-  -webkit-transition: 0.3s all ease-out 0.1s, transform 0.2s ease-in;
-  -moz-transition: 0.3s all ease-out 0.1s, transform 0.2s ease-in;
+  transition: 0.3s all ease-out 0.1s, transform 0.2s ease-in;
   box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
 }
 
@@ -557,18 +571,9 @@ Bounce
   background-position: center center;
   border-radius: 99em;
   opacity: 0.5;
-  /*border: 1px solid #ccc;
-  color:#ccc;*/
-  /* -webkit-box-shadow: 0px -1px 2px 0px rgba(0, 0, 0, 0.5);
-  -moz-box-shadow:    0px -1px 2px 0px rgba(0, 0, 0, 0.5);
-  box-shadow:         0px -1px 2px 0px rgba(0, 0, 0, 0.5);*/
 }
 
 .close:hover {
-              /*
--webkit-box-shadow:  0 1px 1px rgba(0,0,0,0.3);
--moz-box-shadow:  0 1px 1px rgba(0,0,0,0.3);
-box-shadow: 0 1px 1px rgba(0,0,0,0.3);*/
   opacity: 0.9;
 }
 
@@ -582,10 +587,6 @@ box-shadow: 0 1px 1px rgba(0,0,0,0.3);*/
   background-position: center center;
   border-radius: 99em;
   border: 2px solid #fff;
-  /*#4A90E2;*/
- /* -webkit-box-shadow: 0px 0px 10px rgba(0,0,0,.8);
-  -moz-box-shadow: 0px 0px 10px rgba(0,0,0,.8);
-box-shadow: 0px 0px 10px rgba(0,0,0,.8);*/
 }
 
 .contact-icon .circle:hover {
@@ -681,6 +682,12 @@ box-shadow: 0px 0px 10px rgba(0,0,0,.8);*/
   color: #777;
 }
 
+.messages-body {
+  padding: 20px 10px;
+  overflow: auto;
+  max-height: 100%;
+}
+
 @media only screen and (max-device-width: 667px), screen and (max-width: 450px) {
   .avenue-messenger {
     z-index: 2147483001 !important;
@@ -729,8 +736,6 @@ box-shadow: 0px 0px 10px rgba(0,0,0,.8);*/
     border-top-right-radius: 60px;
     border-bottom: 0;
     box-shadow: 1px 4px 20px rgba(22, 20, 19, 0.6);
-    -webkit-box-shadow: 1px 4px 20px rgba(22, 20, 19, 0.6);
-    -moz-box-shadow: 1px 4px 20px rgba(22, 20, 19, 0.6);
   }
 }
 
