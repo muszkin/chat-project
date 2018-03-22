@@ -9,11 +9,11 @@ import com.google.cloud.translate.Translation;
  *
  * @author kari
  */
-public class GoogleTranslateController extends TranslationInterface {
+public class GoogleTranslateClient extends AbstractTranslationClient {
 
   private String sourceLanguage;
 
-  public GoogleTranslateController(String sourceLanguage, String targetLanguage) {
+  public GoogleTranslateClient(String sourceLanguage, String targetLanguage) {
     super(targetLanguage);
     this.sourceLanguage = sourceLanguage;
   }

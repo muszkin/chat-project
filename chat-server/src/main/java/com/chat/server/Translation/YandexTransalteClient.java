@@ -17,11 +17,11 @@ import org.json.JSONObject;
  *
  * @author kari
  */
-public class YandexTransalteController extends TranslationInterface {
+public class YandexTransalteClient extends AbstractTranslationClient {
 
-  Logger logger = Logger.getLogger(YandexTransalteController.class.getName());
+  static final Logger LOGGER = Logger.getLogger(YandexTransalteClient.class.getName());
 
-  public YandexTransalteController(String targetLanguage) {
+  public YandexTransalteClient(String targetLanguage) {
     super(targetLanguage);
   }
 
@@ -45,8 +45,8 @@ public class YandexTransalteController extends TranslationInterface {
       out.close();
 
       int responseCode = con.getResponseCode();
-      System.out.println("\nSending 'GET' request to URL : " + url);
-      System.out.println("Response Code : " + responseCode);
+      LOGGER.log(Level.FINE, "\nSending ''GET'' request to URL : {0}", url);
+      LOGGER.log(Level.FINE, "Response Code : {0}", responseCode);
 
       BufferedReader in = new BufferedReader(
         new InputStreamReader(con.getInputStream()));
@@ -62,7 +62,7 @@ public class YandexTransalteController extends TranslationInterface {
       String text = ((JSONArray) JSONRepsonse.get("text")).getString(0);
       return text;
     } catch (Exception ex) {
-      logger.log(Level.SEVERE, null, ex);
+      LOGGER.log(Level.SEVERE, null, ex);
     }
 
     return "false";

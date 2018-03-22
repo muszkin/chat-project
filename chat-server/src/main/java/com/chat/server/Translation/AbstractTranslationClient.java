@@ -1,19 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.chat.server.Translation;
 
 /**
  *
  * @author kari
  */
-public abstract class TranslationInterface {
+public abstract class AbstractTranslationClient {
 
   private String targetLanguage;
 
-  public TranslationInterface(String targetLanguage) {
+  public AbstractTranslationClient(String targetLanguage) {
     this.targetLanguage = targetLanguage;
   }
 
