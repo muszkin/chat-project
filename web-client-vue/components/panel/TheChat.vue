@@ -104,7 +104,7 @@
           origin: 'server'
         }
         this.$store.commit('newMessage', msg)
-        var sessionId = socket._transport.url.split('/')[5];
+        var sessionId = this.socket._transport.url.split('/')[5];
         this.stompClient.subscribe('/topic/private/' + sessionId, (resp) => {
           let jsonResp = JSON.parse(resp.body)
           this.newMessage = {
