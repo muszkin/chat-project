@@ -18,7 +18,7 @@ class ViewController: UIViewController,StompClientLibDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let url = NSURL(string: "ws://34.248.53.38:8080/register/websocket")
+        let url = NSURL(string: "ws://54.154.209.2:8080/register/websocket")
         socketClient.openSocketWithURLRequest(request: NSURLRequest(url: url! as URL), delegate: self as StompClientLibDelegate)
     }
 

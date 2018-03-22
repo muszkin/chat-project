@@ -91,7 +91,7 @@
     },
     mounted () {
       console.log(this.getMessages)
-      this.socket = new SockJS('http://34.248.53.38:8080/register')
+      this.socket = new SockJS('http://54.154.209.2:8080/register')
       this.stompClient = Stomp.over(this.socket)
       this.stompClient.connect({}, (frame) => {
         const msg = {
