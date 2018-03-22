@@ -28,7 +28,8 @@ module.exports = {
   */
   build: {
     vendor: [
-      '~/plugins/vuetify.js'
+      '~/plugins/vuetify.js',
+      '~/plugins/vue-highlightjs.js'
     ],
     extractCSS: true,
     /*

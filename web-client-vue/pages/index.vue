@@ -7,18 +7,10 @@
             <img src="/logo.png" alt="Vuetify.js" class="mt-3 mb-1 logo" />
          </div>
         <v-card-title class="headline text-xs-center">Czat</v-card-title>
-        <v-card-text>
-          <h1 class="text-xs-center">Super webscoket czacik </h1>
-          <br>
-          <h3 class="mt-3">Widać duże napracowanko</h3>
-          <div class="text-xs-right">
-            <em><small>&mdash; Użytkownik czatu</small></em>
-          </div>
-        </v-card-text>
         <v-card-actions >
           <v-flex class="text-xs-center">
-            <v-btn color="primary" flat nuxt to="/signUp" class="menu-btns">Zacznij</v-btn>
-            <v-btn color="primary" flat nuxt to="/about" class="menu-btns">Info</v-btn>
+            <v-btn color="primary" flat nuxt to="/settings" class="menu-btns">Get Started</v-btn>
+            <v-btn color="primary" flat nuxt to="/panel" class="menu-btns">Dashboard</v-btn>
           </v-flex>
         </v-card-actions>
       </v-card>
