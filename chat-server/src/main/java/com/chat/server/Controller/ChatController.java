@@ -1,5 +1,6 @@
 package com.chat.server.Controller;
 
+import com.chat.server.Translation.YandexTransalteController;
 import com.chat.server.Message.ChatMessage;
 import com.chat.server.Message.HelloMessage;
 import org.springframework.beans.factory.annotation.Autowired;
