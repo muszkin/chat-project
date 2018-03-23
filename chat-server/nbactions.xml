@@ -27,7 +27,6 @@
             <properties>
                 <exec.args>-classpath %classpath ${packageClassName}</exec.args>
                 <exec.executable>java</exec.executable>
-                <Env.GOOGLE_APPLICATION_CREDENTIALS>"/home/kari/CZAT/halko.json"</Env.GOOGLE_APPLICATION_CREDENTIALS>
             </properties>
         </action>
     </actions>

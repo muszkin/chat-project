@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.chat.server.Controller;
+package com.chat.server.Translation;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;

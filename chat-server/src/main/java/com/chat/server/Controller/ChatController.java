@@ -3,6 +3,7 @@ package com.chat.server.Controller;
 import com.chat.server.Translation.YandexTransalteClient;
 import com.chat.server.Message.ChatMessage;
 import com.chat.server.Message.HelloMessage;
+import com.chat.server.MongoDB.MongoDBClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
@@ -14,6 +15,7 @@ public class ChatController {
 
   @Autowired
   private SimpMessageSendingOperations messageSendingOperations;
+  private MongoDBClient mongoDBClient;
 
   @MessageMapping("/hello")
   public void hello(HelloMessage message, SimpMessageHeaderAccessor headerAccessor) throws Exception {
@@ -30,7 +32,9 @@ public class ChatController {
 //        String transaltedByGoogle = polishToEnglishTranslator.traslateString(message.getContent());
 //        messageSendingOperations.convertAndSend("/topic/private/" + headerAccessor.getSessionId(), new ChatMessage("<b>You</b>: " + message.getContent() + transaltedByGoogle));
     YandexTransalteClient translator = new YandexTransalteClient("en");
-    messageSendingOperations.convertAndSend("/topic/private/" + headerAccessor.getSessionId(), new ChatMessage("<b>You</b>: " + message.getContent() + " [" + translator.traslateString(message.getContent()) + "]"));
+    ChatMessage chatMessage = new ChatMessage("<b>You</b>: " + message.getContent() + " [" + translator.traslateString(message.getContent()) + "]");
+    messageSendingOperations.convertAndSend("/topic/private/" + headerAccessor.getSessionId(), chatMessage);
+    mongoDBClient.addNewChatMessageToChatSession("", chatMessage);
   }
 
 }

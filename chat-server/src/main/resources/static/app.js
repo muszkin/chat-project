@@ -13,7 +13,7 @@ function setConnected(connected) {
 }
 
 function connect() {
-    var socket = new SockJS('http://54.154.209.2:8080/register');
+    var socket = new SockJS('http://localhost:8080/register');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
         $("#welcome-form").show();
