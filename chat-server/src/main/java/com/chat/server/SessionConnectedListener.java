@@ -14,6 +14,7 @@ public class SessionConnectedListener implements ApplicationListener<SessionConn
 
   @Autowired
   private ApplicationContext applicationContext;
+  @Autowired
   private MongoDBClient mongoDBClient;
 
   @Override

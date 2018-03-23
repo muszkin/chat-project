@@ -15,6 +15,7 @@ public class ChatController {
 
   @Autowired
   private SimpMessageSendingOperations messageSendingOperations;
+  @Autowired
   private MongoDBClient mongoDBClient;
 
   @MessageMapping("/hello")
@@ -34,7 +35,7 @@ public class ChatController {
     YandexTransalteClient translator = new YandexTransalteClient("en");
     ChatMessage chatMessage = new ChatMessage("<b>You</b>: " + message.getContent() + " [" + translator.traslateString(message.getContent()) + "]");
     messageSendingOperations.convertAndSend("/topic/private/" + headerAccessor.getSessionId(), chatMessage);
-    mongoDBClient.addNewChatMessageToChatSession("", chatMessage);
+    mongoDBClient.addNewChatMessageToChatSession(headerAccessor.getSessionId(), chatMessage);
   }
 
 }
