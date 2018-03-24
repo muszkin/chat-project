@@ -103,7 +103,7 @@
     created   () {
     },
     mounted () {
-      this.socket = new SockJS('http://54.154.209.2:8080/register')
+      this.socket = new SockJS('http://localhost:8080/register')
       this.stompClient = Stomp.over(this.socket)
       this.stompClient.connect({}, (frame) => {
         const msg = {
@@ -111,8 +111,8 @@
           origin: 'server'
         }
         this.$store.commit('newMessage', msg)
-        var sessionId = this.socket._transport.url.split('/')[5]
-        this.stompClient.subscribe('/topic/private/' + sessionId, (resp) => {
+        var sessionId = 'janusz_adminu'
+        this.stompClient.subscribe('/topic/admin', (resp) => {
           let jsonResp = JSON.parse(resp.body)
           this.newMessage = {
             content: jsonResp.content,
