@@ -72,8 +72,13 @@
     },
     methods: {
       sendMessage () {
+        const userId = this.getUserId();
+        const browserLang = this.getBrowserLang()
         console.log('wysyłąnko:' + this.selfMessageContent)
-        this.stompClient.send('/app/chat', {}, JSON.stringify({'content': this.selfMessageContent}))
+        this.stompClient.send('/app/chat', {
+          'user-id': userId,
+          'browser-lang' : browserLang
+        }, JSON.stringify({'content': this.selfMessageContent}))
         const msg = {
           content: this.selfMessageContent,
           origin: 'self'
@@ -105,7 +110,7 @@
     mounted () {
       const userId = this.getUserId();
       const browserLang = this.getBrowserLang()
-      this.socket = new SockJS('http://54.154.209.2:8080/register')
+      this.socket = new SockJS('http://localhost:8080/register')
       this.stompClient = Stomp.over(this.socket)
       this.stompClient.connect({
         'user-id' : userId,
