@@ -24,7 +24,6 @@ export default {
   },
   bumpUnreadMessagesByUserId (state, userId) {
     const index = state.userList.map((user) => user.userId).indexOf(userId)
-    console.log(index)
     state.userList[index].unreadMessages = state.userList[index].unreadMessages + 1
   }
 }

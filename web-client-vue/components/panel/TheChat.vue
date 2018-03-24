@@ -1,6 +1,6 @@
 <template>
   <v-flex xs8 order-xs2 class="chat-main">
-    <section class="avenue-messenger">
+    <section class="avenue-messenger" v-if="getActiveUser">
       <div class="menu">
         <div class="items">
           <span>
@@ -40,6 +40,9 @@
           <button  @click="sendMessage" type="submit" class="message-submit">Send</button>
         </div>
       </div>
+    </section>
+    <section class="avenue-messenger" v-else>
+      <h1 class="select-user">Select User</h1>
     </section>
   </v-flex>
 </template>
@@ -163,6 +166,12 @@ Chat
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
+  }
+
+  h1.select-user{
+    font-size: 40px;
+    text-align: center;
+    padding-top: 50px;
   }
 
   /*--------------------
