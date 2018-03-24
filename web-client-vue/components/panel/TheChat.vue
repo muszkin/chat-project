@@ -108,7 +108,7 @@
       this.$store.dispatch('getUserList')
     },
     mounted () {
-      this.socket = new SockJS('http://localhost:8080/register')
+      this.socket = new SockJS('http://54.154.209.2:8080/register')
       this.stompClient = Stomp.over(this.socket)
       this.stompClient.connect({
         'user-id': 'admin'
