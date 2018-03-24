@@ -7,17 +7,19 @@
               <v-flex xs2 class="pic-block">
                 <v-card-media
                 class="user-pic"
-                :src="imageSrc"
+                :src="avatar"
                 height="50px"
                 contain
                 ></v-card-media>
-                <span v-if="!!messagesCount" class="msg-count">{{ messagesCount }}</span>
+                <!-- <span v-if="!!messagesCount" class="msg-count">{{ messagesCount }}</span> -->
               </v-flex>
               <v-flex xs10>
                 <div class="user-details">
-                  <h5>{{userName}} {{userSurname}}</h5>
+                  <h5>{{ user.userInfo.firstName }} {{ user.userInfo.lastName }}</h5>
+                  <!-- przygotować -->
                   <h6>{{ lastMessage }}</h6>
-                  <span class="last-seen">{{lastSeen}}</span>
+                  <!-- dopisać metode do wybierania informacji o last seen na postawie daty -->
+                  <!-- <span class="last-seen">{{lastSeen}}</span> --> 
                 </div>
               </v-flex>
           </v-layout>
@@ -29,7 +31,18 @@
 
 <script>
   export default {
-    props: ['userName', 'userSurname', 'messagesCount', 'lastMessage', 'imageSrc', 'lastSeen']
+    props: {
+      userId: {
+        type: String,
+        required: true
+      },
+      userInfo : {
+        type: Object
+      },
+      avatar: {
+        type: String
+      }
+    }
   }
 </script>
 

@@ -3,14 +3,11 @@
       <TheNavigation />
       <TheUserSearchBar />
       <UserCard 
-      v-for="(user,index) in getUserList"
-      :key="index"
-      :userName="user.userName"
-      :userSurname="user.userSurname"
-      :messagesCount="user.messagesCount"
-      :lastMessage="user.lastMessage"
-      :imageSrc="user.imageSrc"
-      :lastSeen="user.lastSeen"
+      v-for="(user) in getUserList"
+      :key="user.userId"
+      :userId="user.userId"
+      :userInfo="user.userInfo"
+      :avatar="user.avatar"
       />
     </v-flex>
 </template>

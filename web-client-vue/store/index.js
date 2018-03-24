@@ -3,12 +3,13 @@ export const state = () => ({
   sidebar: false,
   userList: [
     {
-      userName: 'Cool',
-      userSurname: 'User',
-      messagesCount: 10,
-      lastMessage: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae inventore veniam illo veritatis quia.',
-      imageSrc: '/man.png',
-      lastSeen: '2 hours'
+      userInfo: {
+        firstName: 'John',
+        lastName: 'Doe',
+        emial: 'john.doe@example.com'
+      },
+      userId: 2124124,
+      avatar: '/man.png'
     }
   ],
   messages: [
