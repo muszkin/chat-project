@@ -21,7 +21,7 @@ public class ChatController {
   @MessageMapping("/hello")
   public void hello(HelloMessage message, SimpMessageHeaderAccessor headerAccessor) throws Exception {
     Thread.sleep(100); // simulated delay
-    messageSendingOperations.convertAndSend("/topic/private/" + headerAccessor.getSessionId(), new ChatMessage("Hello, " + message.getName() + "!"));
+//    messageSendingOperations.convertAndSend("/topic/private/" + headerAccessor.getHeader("user-id"), new ChatMessage("Hello, " + message.getName() + "!"));
   }
 
   @MessageMapping("/chat")
@@ -32,9 +32,9 @@ public class ChatController {
 //        GoogleTranslateController polishToEnglishTranslator = new GoogleTranslateController("pl", "en");
 //        String transaltedByGoogle = polishToEnglishTranslator.traslateString(message.getContent());
 //        messageSendingOperations.convertAndSend("/topic/private/" + headerAccessor.getSessionId(), new ChatMessage("<b>You</b>: " + message.getContent() + transaltedByGoogle));
-    YandexTransalteClient translator = new YandexTransalteClient("en");
-    ChatMessage chatMessage = new ChatMessage("<b>You</b>: " + message.getContent() + " [" + translator.traslateString(message.getContent()) + "]");
-    messageSendingOperations.convertAndSend("/topic/private/" + headerAccessor.getSessionId(), chatMessage);
+//    YandexTransalteClient translator = new YandexTransalteClient("en");
+    ChatMessage chatMessage = new ChatMessage(message.getContent(), headerAccessor.getNativeHeader("user-id").get(0));
+    messageSendingOperations.convertAndSend("/topic/admin", chatMessage);
     mongoDBClient.addNewChatMessageToChatSession(headerAccessor.getSessionId(), chatMessage);
   }
 
