@@ -128,7 +128,7 @@
       }
     },
     mounted () {
-      this.getShoperParameters()
+      // this.getShoperParameters()
       const userId = this.getUserId();
       const browserLang = this.getBrowserLang()
       const clientEmail = this.clientEmail
@@ -143,12 +143,6 @@
         'last-name': clientLastName,
         'email': clientEmail
       }, (frame) => {
-        const msg = {
-          content: 'Connected to server',
-          origin: 'server'
-        }
-        this.$store.commit('newMessage', msg)
-        var sessionId = this.socket._transport.url.split('/')[5]
         this.stompClient.subscribe('/topic/private/' + userId, (resp) => {
           let jsonResp = JSON.parse(resp.body)
           this.newMessage = {
@@ -157,6 +151,7 @@
           }
         })
       })
+      this.$store.dispatch('getUserById', userId)
     }
   }
 </script>

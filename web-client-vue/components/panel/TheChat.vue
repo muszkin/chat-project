@@ -74,9 +74,9 @@
     },
     watch: {
       newMessage (val) {
+        this.updateScroll()
         if (this.getActiveUserId === val.userId) {
           this.$store.commit('newMessage', val)
-          this.updateScroll()
         } else {
           this.$store.commit('bumpUnreadMessagesByUserId', val.userId)
         }
@@ -94,7 +94,7 @@
           }))
           const msg = {
             content: this.selfMessageContent,
-            origin: 'self'
+            origin: 'server'
           }
           this.$store.commit('newMessage', msg)
           this.updateScroll()
@@ -108,7 +108,7 @@
         const bigInt = 9999999999
         setTimeout(() => {
           msgBox.scrollTop = msgBox.scrollHeight + bigInt
-        }, 100)
+        }, 200)
       }
     },
     created   () {
@@ -129,7 +129,7 @@
           let jsonResp = JSON.parse(resp.body)
           this.newMessage = {
             content: jsonResp.content,
-            origin: 'server',
+            origin: 'self',
             userId: jsonResp.userId
           }
         })

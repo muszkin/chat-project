@@ -65,7 +65,9 @@
         this.$store.commit('changeActiveUser', this.userId)
         this.$store.commit('clearMessageList')
         this.$store.dispatch('getUserById', this.userId)
-        this.updateScroll()
+        setTimeout(() => {
+          this.updateScroll()
+        }, 200)
       }
     }
   }

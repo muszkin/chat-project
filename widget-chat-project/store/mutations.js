@@ -7,6 +7,10 @@ export default {
     },
     newMessage (state, message) {
         state.messages.push(message)
-    }
+    },
+    setMessages (state, { messagesList }) {
+        console.log(messagesList);
+        state.messages = messagesList
+    },
 }
   
