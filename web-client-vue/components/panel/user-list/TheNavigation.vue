@@ -1,7 +1,7 @@
 <template>
  <v-card height="60px" flat class="navigation">
   
-    <v-bottom-nav absolute :value="true" :active.sync="e1" color="transparent">
+    <!-- <v-bottom-nav absolute :value="true" :active.sync="e1" color="transparent">
       <v-btn flat color="#fff" value="chat">
         <span>Chats</span>
         <v-icon>chat</v-icon>
@@ -18,7 +18,7 @@
         <span>Favourites</span>
         <v-icon>star</v-icon>
       </v-btn>
-    </v-bottom-nav>
+    </v-bottom-nav> -->
   </v-card>
 </template>
 

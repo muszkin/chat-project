@@ -1,5 +1,5 @@
 <template>
-  <v-flex xs6 order-xs2 class="chat-main">
+  <v-flex xs8 order-xs2 class="chat-main">
     <section class="avenue-messenger">
       <div class="menu">
         <div class="items">
@@ -17,13 +17,12 @@
       </div>
       <div class="agent-face">
         <div class="half">
-          <img class="agent circle" src="/aws.png" alt="Jesse Tino">
+          <img class="agent circle" :src="getActiveUser.avatar" alt="Jesse Tino">
         </div>
       </div>
       <div class="chat">
         <div class="chat-title">
-          <h1>OUR LOVELY AWS</h1>
-          <h2>Websockets</h2>
+          <h1>{{ getActiveUser.userId }}</h1>
         </div>
         <div class="messages">
           <div class="messages-content">
@@ -66,7 +65,8 @@
     computed: {
       ...mapGetters([
         'getMessages',
-        'getActiveUserId'
+        'getActiveUserId',
+        'getActiveUser'
       ])
     },
     watch: {
@@ -77,20 +77,24 @@
     },
     methods: {
       sendMessage () {
-        console.log(this.getActiveUserId)
-        this.stompClient.send('/app/admin', {
-          'user-id': this.getActiveUserId,
-          'browser-lang': 'pl'
-        }, JSON.stringify({
-          'content': this.selfMessageContent
-        }))
-        const msg = {
-          content: this.selfMessageContent,
-          origin: 'self'
+        const getActiveUserId = this.getActiveUserId
+        if (getActiveUserId) {
+          this.stompClient.send('/app/admin', {
+            'user-id': getActiveUserId,
+            'browser-lang': 'pl'
+          }, JSON.stringify({
+            'content': this.selfMessageContent
+          }))
+          const msg = {
+            content: this.selfMessageContent,
+            origin: 'self'
+          }
+          this.$store.commit('newMessage', msg)
+          this.updateScroll()
+          this.selfMessageContent = ''
+        } else {
+          console.error('No active user id')
         }
-        this.$store.commit('newMessage', msg)
-        this.updateScroll()
-        this.selfMessageContent = ''
       },
       updateScroll () {
         const msgBox = document.querySelector('.messages')
@@ -101,6 +105,7 @@
       }
     },
     created   () {
+      this.$store.dispatch('getUserList')
     },
     mounted () {
       this.socket = new SockJS('http://localhost:8080/register')
@@ -391,19 +396,16 @@ Message Box
     -webkit-box-flex: 0;
     -ms-flex: 0 1 42px;
     flex: 0 1 42px;
-    width: 90%;
+    width: 100%;
     background: #fff;
-    margin: 2px auto;
-    /*-webkit-box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.4);
-  -moz-box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.4);
-  box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.4);*/
-    /*background: rgba(0, 0, 0, 0.3);
-    border-top:1px solid #e3e3e3;*/
+    margin: 5px auto;
     padding: 10px;
     position: relative;
-    border-radius: 20px;
+    border-radius: 0px;
     height: 14px;
     border: 1px solid #ccc;
+    border-right: transparent;
+    border-left: transparent;
   }
 
   .message-box .message-input {
@@ -604,13 +606,12 @@ Bounce
   }
 
   .avenue-messenger {
+    position: relative;
     opacity: 1;
-    border-radius: 10px;
     min-height: 220px !important;
     width: 100%;
     height: 80vh;
     background: rgba(255, 255, 255, 0.9);
-    bottom: 80px;
     z-index: 10;
     box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
   }

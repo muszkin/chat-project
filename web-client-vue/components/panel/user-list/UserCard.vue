@@ -1,11 +1,7 @@
 <template>
   <v-layout row wrap>
     <v-flex xs12>
-      <v-card 
-        class="user-card" 
-        
-        
-      >
+      <v-card class="user-card">
         <v-container fluid grid-list-lg v-on:click="onUserSelect" v-bind:class="{ active: isActive }">
             <v-layout row >
               <v-flex xs2 class="pic-block">
@@ -55,6 +51,7 @@
       onUserSelect () {
         this.$store.commit('changeActiveUser', this.userId)
         this.$store.commit('clearMessageList')
+        this.$store.dispatch('getUserById', this.userId)
       }
     }
   }

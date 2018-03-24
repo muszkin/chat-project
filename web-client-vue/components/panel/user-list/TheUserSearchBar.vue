@@ -1,7 +1,7 @@
 <template>
   <v-layout row wrap>
     <v-flex xs12>
-      <v-card class="user-searchbar">
+      <!-- <v-card class="user-searchbar">
         <v-container fluid grid-list-lg>
             <v-layout row>
               <v-flex xs12>
@@ -12,7 +12,7 @@
               </v-flex>
           </v-layout>
         </v-container>
-      </v-card>
+      </v-card> -->
     </v-flex>
   </v-layout>
   </template>

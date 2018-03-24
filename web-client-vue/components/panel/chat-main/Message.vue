@@ -9,7 +9,7 @@
     <div v-else class="message message-personal"  v-bind:class="{ new: isLastMessage }">
       {{content}}
       <div class="avatar">
-        <img src="/man.png" alt="">
+        <img :src="getActiveUser.avatar" alt="">
       </div>
     </div>
   </div>
@@ -21,7 +21,8 @@
     props: ['content', 'origin', 'index'],
     computed: {
       ...mapGetters([
-        'getMessagesLength'
+        'getMessagesLength',
+        'getActiveUser'
       ]),
       isServer () {
         return this.origin === 'server'

@@ -2,7 +2,7 @@
   <v-layout row mt-4> 
     <TheUserList />
     <TheChat />
-    <TheUserInfo />
+    <!-- <TheUserInfo /> -->
   </v-layout >
 
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <v-app dark>
+  <v-app baseline>
 
     <v-toolbar color="elevation-0" fixed app>
       <v-btn flat nuxt to="/">

@@ -13,5 +13,12 @@ export default {
   },
   clearMessageList (state) {
     state.messages = []
+  },
+  setUserList (state, {users}) {
+    state.userList = users
+  },
+  setMessages (state, { messages }) {
+    console.log(messages)
+    state.messages = messages
   }
 }
