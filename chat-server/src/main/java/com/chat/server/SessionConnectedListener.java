@@ -30,7 +30,8 @@ public class SessionConnectedListener implements ApplicationListener<SessionConn
     if (!userId.equals("admin")) {
       Map<String, SessionConnectedEvent> sessionConnectedEvents
         = (Map<String, SessionConnectedEvent>) applicationContext.getBean("sessionConnectedEvents");
-      if (sessionConnectedEvents.put(userId, e) == null) {
+      sessionConnectedEvents.put(userId, e);
+      if (!mongoDBClient.getSingleUserMessages(userId).isPresent()) {
         mongoDBClient.addNewUserMessages(new UserMessages(userId));
       }
     }

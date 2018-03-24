@@ -13,6 +13,7 @@ public class UserMessages {
   private String userId;
   private Long lastMessageDate;
   private final List<ChatMessage> messages = new ArrayList<>();
+  private String language;
 
   public UserMessages(String userId) {
     this.userId = userId;
@@ -23,6 +24,14 @@ public class UserMessages {
 
   public String getUserId() {
     return userId;
+  }
+
+  public void setLanguage(String language) {
+    this.language = language;
+  }
+
+  public String getLanguage() {
+    return language;
   }
 
   public Long getLastMessageDate() {

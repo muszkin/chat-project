@@ -29,7 +29,7 @@ public class AdminController {
 
     //tlumaczymy
     YandexTransalteClient translator = new YandexTransalteClient(userTargetLang, adminSourceLang);
-    message.setContent(translator.traslateString(message.getContent()));
+    message.setContent(translator.traslateString(message.getContent()).get("content"));
     message.setUserIsAdmin();
     String userId = headerAccessor.getNativeHeader("user-id").get(0);
     messageSendingOperations.convertAndSend("/topic/private/" + userId, message);
