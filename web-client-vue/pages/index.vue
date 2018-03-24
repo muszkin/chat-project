@@ -9,8 +9,8 @@
         <v-card-title class="headline text-xs-center">Czat</v-card-title>
         <v-card-actions >
           <v-flex class="text-xs-center">
-            <v-btn color="primary" flat nuxt to="/settings" class="menu-btns">Get Started</v-btn>
-            <v-btn color="primary" flat nuxt to="/panel" class="menu-btns">Dashboard</v-btn>
+            <v-btn color="dark" flat nuxt to="/settings" class="menu-btns">Get Started</v-btn>
+            <v-btn color="dark" flat nuxt to="/panel" class="menu-btns">Dashboard</v-btn>
           </v-flex>
         </v-card-actions>
       </v-card>
