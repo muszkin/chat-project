@@ -31,9 +31,6 @@
       }
     },
     mounted () {
-      console.log('msg len' + this.getMessagesLength)
-      console.log('msg id' + this.index)
-      console.log(Number(this.getMessagesLength) === Number(this.index))
     }
   }
 </script>

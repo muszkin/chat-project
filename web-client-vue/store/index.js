@@ -8,8 +8,29 @@ export const state = () => ({
         lastName: 'Doe',
         emial: 'john.doe@example.com'
       },
-      userId: 2124124,
-      avatar: '/man.png'
+      userId: '111111',
+      avatar: '/man.png',
+      isActive: true
+    },
+    {
+      userInfo: {
+        firstName: 'Jacek',
+        lastName: 'Placek',
+        emial: 'john.doe@example.com'
+      },
+      userId: '22222',
+      avatar: '/man.png',
+      isActive: false
+    },
+    {
+      userInfo: {
+        firstName: 'Super',
+        lastName: 'Agent',
+        emial: 'john.doe@example.com'
+      },
+      userId: '333',
+      avatar: '/man.png',
+      isActive: false
     }
   ],
   messages: [
@@ -32,6 +53,9 @@ export const getters = {
   },
   getMessagesLength (state) {
     return state.messages.length
+  },
+  getActiveUserId (state) {
+    return state.userList.find(user => user.isActive).userId
   }
 }
 export const mutations = {
@@ -40,5 +64,14 @@ export const mutations = {
   },
   newMessage (state, message) {
     state.messages.push(message)
+  },
+  changeActiveUser (state, userId) {
+    state.userList = state.userList.map(user => {
+      user.userId === userId ? user.isActive = true : user.isActive = false
+      return user
+    })
+  },
+  clearMessageList (state) {
+    state.messages = []
   }
 }

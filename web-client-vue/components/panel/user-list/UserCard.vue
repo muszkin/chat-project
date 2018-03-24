@@ -1,9 +1,13 @@
 <template>
   <v-layout row wrap>
     <v-flex xs12>
-      <v-card class="user-card">
-        <v-container fluid grid-list-lg>
-            <v-layout row>
+      <v-card 
+        class="user-card" 
+        
+        
+      >
+        <v-container fluid grid-list-lg v-on:click="onUserSelect" v-bind:class="{ active: isActive }">
+            <v-layout row >
               <v-flex xs2 class="pic-block">
                 <v-card-media
                 class="user-pic"
@@ -15,9 +19,10 @@
               </v-flex>
               <v-flex xs10>
                 <div class="user-details">
-                  <h5>{{ user.userInfo.firstName }} {{ user.userInfo.lastName }}</h5>
+                  <h5>{{ userInfo.firstName }} {{ userInfo.lastName }}</h5>
+                  <h6>is active: {{ isActive }}</h6>
                   <!-- przygotować -->
-                  <h6>{{ lastMessage }}</h6>
+                  <!-- <h6>{{ lastMessage }}</h6> -->
                   <!-- dopisać metode do wybierania informacji o last seen na postawie daty -->
                   <!-- <span class="last-seen">{{lastSeen}}</span> --> 
                 </div>
@@ -36,11 +41,20 @@
         type: String,
         required: true
       },
-      userInfo : {
+      userInfo: {
         type: Object
       },
       avatar: {
         type: String
+      },
+      isActive: {
+        type: Boolean
+      }
+    },
+    methods: {
+      onUserSelect () {
+        this.$store.commit('changeActiveUser', this.userId)
+        this.$store.commit('clearMessageList')
       }
     }
   }
@@ -49,7 +63,7 @@
 <style scoped>
 .active {
   color: #ffffff;
-  background: #607D8B;
+  background: #757575;
 }
 .user-card{
   color: #ffffff;

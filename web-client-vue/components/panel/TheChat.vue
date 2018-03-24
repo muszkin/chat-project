@@ -65,7 +65,8 @@
     },
     computed: {
       ...mapGetters([
-        'getMessages'
+        'getMessages',
+        'getActiveUserId'
       ])
     },
     watch: {
@@ -76,8 +77,13 @@
     },
     methods: {
       sendMessage () {
-        console.log('wysyłąnko:' + this.selfMessageContent)
-        this.stompClient.send('/app/chat', {}, JSON.stringify({'content': this.selfMessageContent}))
+        console.log(this.getActiveUserId)
+        this.stompClient.send('/app/chat', {
+          'user-id': this.getActiveUserId,
+          'browser-lang': 'pl'
+        }, JSON.stringify({
+          'content': this.selfMessageContent
+        }))
         const msg = {
           content: this.selfMessageContent,
           origin: 'self'
@@ -94,8 +100,9 @@
         }, 100)
       }
     },
+    created   () {
+    },
     mounted () {
-      console.log(this.getMessages)
       this.socket = new SockJS('http://54.154.209.2:8080/register')
       this.stompClient = Stomp.over(this.socket)
       this.stompClient.connect({}, (frame) => {

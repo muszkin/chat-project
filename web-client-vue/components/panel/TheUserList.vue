@@ -8,6 +8,7 @@
       :userId="user.userId"
       :userInfo="user.userInfo"
       :avatar="user.avatar"
+      :isActive="user.isActive"
       />
     </v-flex>
 </template>
@@ -35,7 +36,6 @@ export default {
     ])
   },
   mounted () {
-    console.log(this.getUserList)
   },
   components: {
     UserCard,
