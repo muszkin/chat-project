@@ -27,7 +27,7 @@ public class UserMessagesController {
   @RequestMapping("/all")
   public String getAllUserMessages() {
     List<UserMessages> list = mongoDBClient.getAllUserMessages();
-    list.sort((m, n) -> m.getLastMessageDate().compareTo(n.getLastMessageDate()));
+//    list.sort((m, n) -> m.getLastMessageDate().compareTo(n.getLastMessageDate()));
     return gson.toJson(list);
   }
 

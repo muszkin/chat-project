@@ -35,7 +35,7 @@ public class MongoDBClient implements CommandLineRunner {
   }
 
   public List<UserMessages> getAllUserMessages() {
-    return chatSessionRepository.findAll();
+        return chatSessionRepository.findAll();
   }
 
   public List<UserMessages> getAllUserMessages(Set<String> userIds) {
