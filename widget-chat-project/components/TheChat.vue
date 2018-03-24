@@ -134,7 +134,7 @@
       const clientEmail = this.clientEmail
       const clientFirstName = this.clientFirstName
       const clientLastName = this.clientLastName
-      this.socket = new SockJS(window.location.origin +'/register')
+      this.socket = new SockJS('http://localhost:8080/register')
       this.stompClient = Stomp.over(this.socket)
       this.stompClient.connect({
         'user-id' : userId,
