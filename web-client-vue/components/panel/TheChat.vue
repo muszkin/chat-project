@@ -78,7 +78,7 @@
     methods: {
       sendMessage () {
         console.log(this.getActiveUserId)
-        this.stompClient.send('/topic/admin', {
+        this.stompClient.send('/app/admin', {
           'user-id': this.getActiveUserId,
           'browser-lang': 'pl'
         }, JSON.stringify({
