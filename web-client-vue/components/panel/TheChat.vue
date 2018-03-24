@@ -111,7 +111,7 @@
       this.socket = new SockJS('http://localhost:8080/register')
       this.stompClient = Stomp.over(this.socket)
       this.stompClient.connect({
-        'user-id' : 'admin'
+        'user-id': 'admin'
       }, (frame) => {
         const msg = {
           content: 'Connected to server',
