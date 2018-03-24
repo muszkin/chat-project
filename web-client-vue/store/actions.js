@@ -9,7 +9,8 @@ export default {
         },
         userId: 'jf5804a6',
         avatar: '',
-        isActive: true
+        isActive: true,
+        isConnected: true
       },
       {
         userInfo: {
@@ -19,7 +20,8 @@ export default {
         },
         userId: '22222',
         avatar: '',
-        isActive: false
+        isActive: false,
+        isConnected: true
       },
       {
         userInfo: {
@@ -29,7 +31,8 @@ export default {
         },
         userId: '333',
         avatar: '',
-        isActive: false
+        isActive: false,
+        isConnected: true
       }
     ]
     users = users.map((user, index) => {

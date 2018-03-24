@@ -6,12 +6,8 @@
         <v-toolbar-title v-text="title" ></v-toolbar-title>
       </v-btn>
         <v-spacer />  
-        <!-- <v-btn flat color="primary" nuxt to="/signUp">SIGN UP</v-btn> -->
-        <!-- <v-btn flat color="primary" nuxt to="/pricing">PRICING</v-btn> -->
-        <!-- <v-btn flat color="primary" nuxt to="/about">ABOUT</v-btn> -->
-        <!-- <v-btn flat color="primary" nuxt to="/login">LOGIN</v-btn> -->
-        <v-btn flat color="primary" nuxt to="/panel">Dashboard</v-btn>
-         <v-btn flat color="primary" nuxt to="/settings">Settings</v-btn>
+        <v-btn class="btn-chat" flat nuxt to="/panel">Dashboard</v-btn>
+         <v-btn flat nuxt to="/settings">Settings</v-btn>
     </v-toolbar>
     <v-content>
       <v-container>
@@ -25,7 +21,7 @@
 export default {
   data () {
     return {
-      title: 'czat'
+      title: 'Chat Project'
     }
   }
 }

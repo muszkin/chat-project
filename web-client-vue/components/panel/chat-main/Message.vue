@@ -1,9 +1,9 @@
 <template>
-  <div style="position:relative">
+  <div class="msg-box">
     <div v-if="isServer" class="message" v-bind:class="{ new: isLastMessage }">
       {{content}} {{index}}
       <div class="avatar">
-        <img src="/aws.png" alt="">
+        <img src="http://baconmockup.com/300/300/" alt="">
       </div>
     </div>
     <div v-else class="message message-personal"  v-bind:class="{ new: isLastMessage }">
@@ -38,6 +38,10 @@
 
 <style>
 .messages .message.message-personal .avatar{
-left: 60px !important;
+    right: -35px;
+    left: unset;
+}
+.msg-box {
+  position: relative;
 }
 </style>

@@ -27,9 +27,12 @@
 
 
 
+
 <style scoped>
 
-*/
+.html {
+  width: 100%;
+}
 
 .hljs {
   display: block;
