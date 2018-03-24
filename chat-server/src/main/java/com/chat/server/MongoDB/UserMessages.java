@@ -1,7 +1,6 @@
 package com.chat.server.MongoDB;
 
 import com.chat.server.Message.ChatMessage;
-import java.sql.Timestamp;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,8 +11,8 @@ public class UserMessages {
 
   private String id;
   private String userId;
-  private Timestamp lastMessageDate;
-  private final Map<ChatMessage, Timestamp> messages = new HashMap<>();
+  private Long lastMessageDate;
+  private final Map<Long, ChatMessage> messages = new HashMap<>();
 
   public UserMessages(String userId) {
     this.userId = userId;
@@ -26,17 +25,17 @@ public class UserMessages {
     return userId;
   }
 
-  public Timestamp getLastMessageDate() {
+  public Long getLastMessageDate() {
     return lastMessageDate;
   }
 
-  public Map<ChatMessage, Timestamp> getMessages() {
+  public Map<Long, ChatMessage> getMessages() {
     return Collections.unmodifiableMap(messages);
   }
 
   public void addToList(ChatMessage chatMessage) {
-    Timestamp date = new Timestamp(System.currentTimeMillis());
-    messages.put(chatMessage, date);
+    Long date = System.currentTimeMillis();
+    messages.put(date, chatMessage);
     lastMessageDate = date;
   }
 
