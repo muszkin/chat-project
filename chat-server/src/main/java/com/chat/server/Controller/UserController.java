@@ -45,7 +45,7 @@ public class UserController {
     } else {
       translator = new YandexTransalteClient(adminTargetLang);
       laguagaeMessageMap = translator.traslateString(message.getContent());
-      mongoDBClient.setUserLanguage(laguagaeMessageMap.get("lang"));
+      mongoDBClient.setUserLanguage(userId, laguagaeMessageMap.get("lang"));
     }
 
     ChatMessage chatMessage = new ChatMessage(
