@@ -16,7 +16,7 @@
               <v-flex xs10>
                 <div class="user-details">
                   <h5>{{ userId }} <sup v-if="unreadMessages !== 0">{{ unreadMessages }}</sup></h5>
-                  <h6>Last Seen: {{ new Date() }}</h6>
+                  <h6>Last Seen: {{ new Date(lastSeenDate) }}</h6>
                   <!-- przygotować -->
                   <!-- <h6>{{ lastMessage }}</h6> -->
                   <!-- dopisać metode do wybierania informacji o last seen na postawie daty -->
@@ -48,13 +48,24 @@
       },
       unreadMessages: {
         type: Number
+      },
+      lastSeenDate: {
+        type: Number
       }
     },
     methods: {
+      updateScroll () {
+        const msgBox = document.querySelector('.messages')
+        const bigInt = 9999999999
+        setTimeout(() => {
+          msgBox.scrollTop = msgBox.scrollHeight + bigInt
+        }, 200)
+      },
       onUserSelect () {
         this.$store.commit('changeActiveUser', this.userId)
         this.$store.commit('clearMessageList')
         this.$store.dispatch('getUserById', this.userId)
+        this.updateScroll()
       }
     }
   }

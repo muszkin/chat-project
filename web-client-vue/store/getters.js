@@ -9,9 +9,17 @@ export default {
     return state.messages.length
   },
   getActiveUser (state) {
-    return state.userList.length !== 0 ? state.userList.find(user => user.isActive) : false
+    if (state.userList.length !== 0 && state.userList.find(user => user.isActive)) {
+      return state.userList.find(user => user.isActive)
+    } else {
+      return false
+    }
   },
   getActiveUserId (state) {
-    return state.userList.length !== 0 ? state.userList.find(user => user.isActive).userId : false
+    if (state.userList.length !== 0 && state.userList.find(user => user.isActive)) {
+      return state.userList.find(user => user.isActive).userId
+    } else {
+      return false
+    }
   }
 }

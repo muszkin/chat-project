@@ -16,10 +16,9 @@ export default {
         user.avatar = `https://placebear.com/30${index}/30${index}`
         user.userInfo = {}
         user.userId = data.userId
-        if (index === 0) {
-          user.isActive = true
-        }
         user.unreadMessages = 0
+        user.lastSeenDate = data.lastMessageDate
+        console.log(data)
         return user
       })
       commit('setUserList', {userList})

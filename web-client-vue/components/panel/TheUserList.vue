@@ -10,6 +10,7 @@
       :avatar="user.avatar"
       :isActive="user.isActive"
       :unreadMessages="user.unreadMessages"
+      :lastSeenDate="user.lastSeenDate"
       />
     </v-flex>
 </template>
