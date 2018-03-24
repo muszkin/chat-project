@@ -4,11 +4,11 @@ export const state = () => ({
   userList: [
     {
       userInfo: {
-        firstName: 'John',
-        lastName: 'Doe',
+        firstName: 'Daniel',
+        lastName: 'Skoczny',
         emial: 'john.doe@example.com'
       },
-      userId: '111111',
+      userId: 'jf5804a6',
       avatar: '/man.png',
       isActive: true
     },
