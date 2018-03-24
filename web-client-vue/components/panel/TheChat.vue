@@ -78,7 +78,7 @@
     methods: {
       sendMessage () {
         console.log(this.getActiveUserId)
-        this.stompClient.send('/app/chat', {
+        this.stompClient.send('/admin', {
           'user-id': this.getActiveUserId,
           'browser-lang': 'pl'
         }, JSON.stringify({
