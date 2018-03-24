@@ -271,15 +271,6 @@ Messages
     font-size: 12px;
   }
 
-  .messages .message::before {
-    /*  content: '';
-    position: absolute;
-    bottom: -6px;
-    border-top: 6px solid rgba(0, 0, 0, 0.1);
-    left: 0;
-    border-right: 7px solid transparent;*/
-  }
-
   .messages .message .avatar {
     position: absolute;
     z-index: 1;
@@ -308,22 +299,6 @@ Messages
     border: 1px solid #ccc;
     border-radius: 20px 20px 0 20px;
     margin-right: 35px;
-  }
-
-  .messages .message.message-personal::before {
-    /*
-      content:"";
-  border-color:#4A90E2 transparent;
-    width:0;
-    border-style:solid;*/
-    /*
- left: auto;
- right: 0;
- border-right: none;
-border-left: 8px solid transparent;
- border-top: 9px solid #fff;
- 
- bottom: -8px;*/
   }
 
   .messages .message:last-child {
@@ -637,8 +612,6 @@ Bounce
     background: rgba(255, 255, 255, 0.9);
     bottom: 80px;
     z-index: 10;
-    -webkit-transition: 0.3s all ease-out 0.1s, transform 0.2s ease-in;
-    -moz-transition: 0.3s all ease-out 0.1s, transform 0.2s ease-in;
     box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
   }
 
