@@ -54,4 +54,8 @@ public class MongoDBClient implements CommandLineRunner {
 
   }
 
+  public void setUserLanguage(String get) {
+    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+  }
+
 }
