@@ -2,8 +2,9 @@
   <div>
     <div v-if="isServer" class="message new">
         <figure class="avatar">
-        <img src="https://avatars2.githubusercontent.com/u/7688113?s=88&v=4">
-        </figure>{{content}} {{index}}
+        <img src="https://placebear.com/300/300">
+        </figure>
+        <span v-html="content"></span>
     </div>
     <div v-else class="message message-personal new"  v-bind:class="{ message_personal: isLastMessage }">{{content}}</div>
   </div>

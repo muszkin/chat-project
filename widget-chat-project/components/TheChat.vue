@@ -6,16 +6,16 @@
         <a href="#" title="End Chat">&#10005;</a>
         </span>
       </div>
-      <div class="button">...</div>
+      <!-- <div class="button">...</div> -->
     </div>
     <div class="agent-face">
       <div class="half">
-      <img class="agent circle" src="https://avatars2.githubusercontent.com/u/7688113?s=88&v=4" alt="Jesse Tino"></div>
+      <img class="agent circle" src="https://placebear.com/300/300" alt="Jesse Tino"></div>
     </div>
     <div class="chat">
       <div class="chat-title">
-        <h1>JHWH</h1>
-        <h2>RE/MAX</h2>
+        <h1>Teddy</h1>
+        <h2>Bear</h2>
       </div>
       <div class="messages">
         <div class="messages-content">
@@ -43,6 +43,7 @@
   import Message from './Message.vue'
   import SockJS from 'sockjs-client'
   import Stomp from '@stomp/stompjs'
+  import uniqid from 'uniqid'
   import { mapGetters } from 'vuex'
   export default {
     data () {
@@ -82,18 +83,34 @@
         this.selfMessageContent = ''
       },
       updateScroll () {
-        const msgBox = document.querySelector('.messages')
+        const msgBox = document.querySelector('.messages-body')
         const bigInt = 9999999999
         setTimeout(() => {
           msgBox.scrollTop = msgBox.scrollHeight + bigInt
         }, 100)
+      },
+      getUserId () {
+        const userId = window.localStorage.getItem('_userIdChatProject');
+        if(!userId){
+          const userId = uniqid();
+          window.localStorage.setItem('_userIdChatProject', userId);
+          return userId;
+        }
+        return userId
+      },
+      getBrowserLang () {
+        return window.navigator.userLanguage || window.navigator.language;
       }
     },
     mounted () {
-      console.log(this.getMessages)
+      const userId = this.getUserId();
+      const browserLang = this.getBrowserLang()
       this.socket = new SockJS('http://54.154.209.2:8080/register')
       this.stompClient = Stomp.over(this.socket)
-      this.stompClient.connect({}, (frame) => {
+      this.stompClient.connect({
+        'user-id' : userId,
+        'browser-lang' : browserLang
+      }, (frame) => {
         const msg = {
           content: 'Connected to server',
           origin: 'server'
