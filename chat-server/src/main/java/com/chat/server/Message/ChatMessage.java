@@ -22,8 +22,12 @@ public class ChatMessage {
     return userId;
   }
   
-  public void setTranslatedContend(String translatedContend) {
-      this.content = translatedContend;
+  public void setContent(String content) {
+      this.content = content;
+  }
+
+  public void setUserIsAdmin() {
+    this.userId = "admin";
   }
   
 
