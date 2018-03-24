@@ -22,7 +22,7 @@
       </div>
       <div class="chat">
         <div class="chat-title">
-          <h1>{{ getActiveUser.userId }}</h1>
+          <!-- <h1>{{ getActiveUser.userId }}</h1> -->
         </div>
         <div class="messages">
           <div class="messages-content">

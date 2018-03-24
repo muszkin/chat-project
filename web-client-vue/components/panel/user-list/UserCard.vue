@@ -1,8 +1,8 @@
 <template>
   <v-layout row wrap>
     <v-flex xs12>
-      <v-card class="user-card">
-        <v-container fluid grid-list-lg v-on:click="onUserSelect" v-bind:class="{ active: isActive }">
+      <v-card class="user-card" v-bind:class="{ active: isActive }">
+        <v-container fluid grid-list-lg v-on:click="onUserSelect">
             <v-layout row >
               <v-flex xs2 class="pic-block">
                 <v-card-media
@@ -16,7 +16,7 @@
               <v-flex xs10>
                 <div class="user-details">
                   <h5>{{ userInfo.firstName }} {{ userInfo.lastName }}</h5>
-                  <h6>is active: {{ isActive }}</h6>
+                  <h6>Last Seen: {{ new Date() }}</h6>
                   <!-- przygotować -->
                   <!-- <h6>{{ lastMessage }}</h6> -->
                   <!-- dopisać metode do wybierania informacji o last seen na postawie daty -->
@@ -59,25 +59,27 @@
 
 <style scoped>
 .active {
-  color: #ffffff;
-  background: #757575;
+  border-bottom: 5px solid #ffeb3b!important;
 }
 .user-card{
   color: #ffffff;
-  background-color: #424242;
-  border-top: 1px solid rgb(133, 133, 133);
-  border-radius: 5px;
+  background-color: #2b646b;
+  border-bottom: 5px solid #2b646b;
   margin: 0px 1px;
+  margin-bottom: 5px;
+  transition-duration: .7s;
 }
 
 .user-card:hover{
-  background:#4f4f4f;
-  /* color: #0e0e0e; */
+  background:#969696;
+  border-bottom: 5px solid #969696;
+  transition-duration: .7s;
   cursor: pointer;
 }
 
 .user-details {
   position: relative;
+  margin-left: 20px;
 }
 .user-details h5 {
   font-weight: 500;
