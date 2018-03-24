@@ -52,7 +52,10 @@
         newMessage: {},
         selfMessageContent: '',
         socket: null,
-        stompClient: null
+        stompClient: null,
+        clientFirstName: null,
+        clientLastName: null,
+        clientEmail: null
       }
     },
     components: {
@@ -77,7 +80,7 @@
         console.log('wysyłąnko:' + this.selfMessageContent)
         this.stompClient.send('/app/chat', {
           'user-id': userId,
-          'browser-lang' : browserLang
+          'browser-lang' : browserLang,
         }, JSON.stringify({
           'content': this.selfMessageContent
         }))
@@ -107,16 +110,38 @@
       },
       getBrowserLang () {
         return window.navigator.userLanguage || window.navigator.language;
+      },
+      getShoperParameters () {
+        try {
+          var params = location.href.split('?')[1].split('&');
+          var data = {};
+          for (let x in params) {
+            data[params[x].split('=')[0]] = decodeURIComponent( params[x].split('=')[1] );
+          }
+          this.clientFirstName = data.firstName
+          this.clientLastName = data.lastName
+          this.clientEmail = data.email
+          
+        } catch (error) {
+          console.log(error)
+        }
       }
     },
     mounted () {
+      this.getShoperParameters()
       const userId = this.getUserId();
       const browserLang = this.getBrowserLang()
+      const clientEmail = this.clientEmail
+      const clientFirstName = this.clientFirstName
+      const clientLastName = this.clientLastName
       this.socket = new SockJS('http://localhost:8080/register')
       this.stompClient = Stomp.over(this.socket)
       this.stompClient.connect({
         'user-id' : userId,
-        'browser-lang' : browserLang
+        'browser-lang' : browserLang,
+        'first-name': clientFirstName,
+        'last-name': clientLastName,
+        'email': clientEmail
       }, (frame) => {
         const msg = {
           content: 'Connected to server',

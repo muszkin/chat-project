@@ -17,7 +17,7 @@
       </div>
       <div class="agent-face">
         <div class="half">
-          <img class="agent circle" :src="getActiveUser.avatar" alt="Jesse Tino">
+          <img class="agent circle" :src="getActiveUser.avatar" alt="">
         </div>
       </div>
       <div class="chat">
