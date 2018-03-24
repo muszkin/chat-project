@@ -27,10 +27,12 @@ public class SessionConnectedListener implements ApplicationListener<SessionConn
     Map<String, LinkedList> nativeHeaders = (Map<String, LinkedList>) headers.getHeaders().get("nativeHeaders");
     String userId = (String) nativeHeaders.get("user-id").get(0);
 
-    Map<String, SessionConnectedEvent> sessionConnectedEvents
-      = (Map<String, SessionConnectedEvent>) applicationContext.getBean("sessionConnectedEvents");
-    if (sessionConnectedEvents.put(userId, e) == null) {
-      mongoDBClient.addNewUserMessages(new UserMessages(userId));
+    if (!userId.equals("admin")) {
+      Map<String, SessionConnectedEvent> sessionConnectedEvents
+        = (Map<String, SessionConnectedEvent>) applicationContext.getBean("sessionConnectedEvents");
+      if (sessionConnectedEvents.put(userId, e) == null) {
+        mongoDBClient.addNewUserMessages(new UserMessages(userId));
+      }
     }
   }
 

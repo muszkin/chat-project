@@ -3,6 +3,7 @@ package com.chat.server.MongoDB;
 import com.chat.server.Message.ChatMessage;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -26,21 +27,31 @@ public class MongoDBClient implements CommandLineRunner {
   }
 
   public void addNewChatMessageToUserMessages(String userId, ChatMessage chatMessage) {
+    Optional<UserMessages> userMessages = getSingleUserMessages(userId);
+    if (userMessages.isPresent()) {
+      userMessages.get().addToList(chatMessage);
+      chatSessionRepository.save(userMessages.get());
+    }
+  }
+
+  public List<UserMessages> getAllUserMessages() {
+    return chatSessionRepository.findAll();
+  }
+
+  public List<UserMessages> getAllUserMessages(Set<String> userIds) {
+    return (List<UserMessages>) chatSessionRepository.findAllById(userIds);
+  }
+
+  public Optional<UserMessages> getSingleUserMessages(String userId) {
     ExampleMatcher matcher = ExampleMatcher.matching()
       .withIgnoreNullValues()
       .withIgnorePaths("messages")
       .withIgnorePaths("lastMessageDate")
       .withIgnorePaths("id");
-    Optional<UserMessages> chatSession = chatSessionRepository.findOne(
+    Optional<UserMessages> userMessages = chatSessionRepository.findOne(
       Example.of(new UserMessages(userId), matcher));
-    if (chatSession.isPresent()) {
-      chatSession.get().addToList(chatMessage);
-      chatSessionRepository.save(chatSession.get());
-    }
-  }
-  
-  public List<UserMessages> getAllUserMessages() {
-    return chatSessionRepository.findAll();
+    return userMessages;
+
   }
 
 }
