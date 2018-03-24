@@ -15,7 +15,7 @@
               </v-flex>
               <v-flex xs10>
                 <div class="user-details">
-                  <h5>{{ userInfo.firstName }} {{ userInfo.lastName }}</h5>
+                  <h5>{{ userId }}</h5>
                   <h6>Last Seen: {{ new Date() }}</h6>
                   <!-- przygotować -->
                   <!-- <h6>{{ lastMessage }}</h6> -->
