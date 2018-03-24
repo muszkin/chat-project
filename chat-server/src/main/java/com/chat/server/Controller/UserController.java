@@ -39,7 +39,7 @@ public class UserController {
         YandexTransalteClient translator = new YandexTransalteClient(adminTargetLang, userSourceLang);
         ChatMessage chatMessage = new ChatMessage(translator.traslateString(message.getContent()), headerAccessor.getNativeHeader("user-id").get(0));
         messageSendingOperations.convertAndSend("/topic/admin", chatMessage);
-        mongoDBClient.addNewChatMessageToChatSession(headerAccessor.getSessionId(), chatMessage);
+        mongoDBClient.addNewChatMessageToUserMessages(headerAccessor.getNativeHeader("user-id").get(0), chatMessage);
     }
 
 }
