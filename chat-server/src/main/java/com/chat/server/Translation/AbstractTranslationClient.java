@@ -1,5 +1,7 @@
 package com.chat.server.Translation;
 
+import java.util.Map;
+
 /**
  *
  * @author kari
@@ -20,5 +22,5 @@ public abstract class AbstractTranslationClient {
     this.targetLanguage = targetLanguage;
   }
 
-  abstract String traslateString(String input);
+  abstract Map<String,String> traslateString(String input);
 }
