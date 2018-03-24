@@ -78,7 +78,9 @@
         this.stompClient.send('/app/chat', {
           'user-id': userId,
           'browser-lang' : browserLang
-        }, JSON.stringify({'content': this.selfMessageContent}))
+        }, JSON.stringify({
+          'content': this.selfMessageContent
+        }))
         const msg = {
           content: this.selfMessageContent,
           origin: 'self'
