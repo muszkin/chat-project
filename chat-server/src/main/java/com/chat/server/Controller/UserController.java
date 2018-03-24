@@ -36,7 +36,8 @@ public class UserController {
     Optional<UserMessages> userMessages = mongoDBClient.getSingleUserMessages(userId);
     YandexTransalteClient translator = null;
     Map<String, String> laguagaeMessageMap = null;
-    if (userMessages.isPresent()) {
+//    if (userMessages.isPresent()) {
+    if (false) {
       String language = userMessages.get().getLanguage();
 //    String userBrowserLang = headerAccessor.getNativeHeader("browser-lang").get(0);
       translator = new YandexTransalteClient(adminTargetLang, language);
