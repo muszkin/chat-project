@@ -111,7 +111,6 @@
           origin: 'server'
         }
         this.$store.commit('newMessage', msg)
-        var sessionId = 'janusz_adminu'
         this.stompClient.subscribe('/topic/admin', (resp) => {
           let jsonResp = JSON.parse(resp.body)
           this.newMessage = {
