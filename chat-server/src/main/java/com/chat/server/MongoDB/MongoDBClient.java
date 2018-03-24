@@ -54,8 +54,11 @@ public class MongoDBClient implements CommandLineRunner {
 
   }
 
-  public void setUserLanguage(String get) {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+  public void setUserLanguage(String userId, String language) {
+//    chatSessionRepository
+      Optional<UserMessages> userMessage = getSingleUserMessages(userId);
+      userMessage.get().setLanguage(language);
+      chatSessionRepository.save(userMessage.get());
   }
 
 }
