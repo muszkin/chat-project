@@ -1,9 +1,9 @@
 package com.chat.server.MongoDB;
 
 import com.chat.server.Message.ChatMessage;
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "userMessages")
@@ -12,7 +12,7 @@ public class UserMessages {
   private String id;
   private String userId;
   private Long lastMessageDate;
-  private final Map<Long, ChatMessage> messages = new HashMap<>();
+  private final List<ChatMessage> messages = new ArrayList<>();
 
   public UserMessages(String userId) {
     this.userId = userId;
@@ -29,13 +29,13 @@ public class UserMessages {
     return lastMessageDate;
   }
 
-  public Map<Long, ChatMessage> getMessages() {
-    return Collections.unmodifiableMap(messages);
+  public List<ChatMessage> getMessages() {
+    return Collections.unmodifiableList(messages);
   }
 
   public void addToList(ChatMessage chatMessage) {
     Long date = System.currentTimeMillis();
-    messages.put(date, chatMessage);
+    messages.add(chatMessage);
     lastMessageDate = date;
   }
 
