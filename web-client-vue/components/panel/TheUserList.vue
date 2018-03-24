@@ -9,6 +9,7 @@
       :userInfo="user.userInfo"
       :avatar="user.avatar"
       :isActive="user.isActive"
+      :unreadMessages="user.unreadMessages"
       />
     </v-flex>
 </template>

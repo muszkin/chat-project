@@ -15,7 +15,7 @@
               </v-flex>
               <v-flex xs10>
                 <div class="user-details">
-                  <h5>{{ userId }}</h5>
+                  <h5>{{ userId }} <sup v-if="unreadMessages !== 0">{{ unreadMessages }}</sup></h5>
                   <h6>Last Seen: {{ new Date() }}</h6>
                   <!-- przygotować -->
                   <!-- <h6>{{ lastMessage }}</h6> -->
@@ -45,6 +45,9 @@
       },
       isActive: {
         type: Boolean
+      },
+      unreadMessages: {
+        type: Number
       }
     },
     methods: {
@@ -60,6 +63,11 @@
 <style scoped>
 .active {
   border-bottom: 5px solid #ffeb3b!important;
+}
+sup {
+    background: #d02c2c;
+    padding: 5px 8px;
+    border-radius: 100%;
 }
 .user-card{
   color: #ffffff;

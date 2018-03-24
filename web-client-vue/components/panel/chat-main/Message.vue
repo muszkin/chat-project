@@ -1,7 +1,7 @@
 <template>
   <div class="msg-box">
     <div v-if="isServer" class="message" v-bind:class="{ new: isLastMessage }">
-      {{content}} {{index}}
+      {{content}}
       <div class="avatar">
         <img src="http://baconmockup.com/300/300/" alt="">
       </div>

@@ -14,11 +14,17 @@ export default {
   clearMessageList (state) {
     state.messages = []
   },
-  setUserList (state, {users}) {
-    state.userList = users
+  setUserList (state, {userList}) {
+    state.userList = userList
   },
-  setMessages (state, { messages }) {
-    console.log(messages)
-    state.messages = messages
+  setMessages (state, { messagesList, userId }) {
+    state.messages = messagesList
+    const index = state.userList.map((user) => user.userId).indexOf(userId)
+    state.userList[index].unreadMessages = 0
+  },
+  bumpUnreadMessagesByUserId (state, userId) {
+    const index = state.userList.map((user) => user.userId).indexOf(userId)
+    console.log(index)
+    state.userList[index].unreadMessages = state.userList[index].unreadMessages + 1
   }
 }

@@ -71,8 +71,12 @@
     },
     watch: {
       newMessage (val) {
-        this.$store.commit('newMessage', val)
-        this.updateScroll()
+        if (this.getActiveUserId === val.userId) {
+          this.$store.commit('newMessage', val)
+          this.updateScroll()
+        } else {
+          this.$store.commit('bumpUnreadMessagesByUserId', val.userId)
+        }
       }
     },
     methods: {
@@ -108,7 +112,7 @@
       this.$store.dispatch('getUserList')
     },
     mounted () {
-      this.socket = new SockJS('http://localhost:8080/register')
+      this.socket = new SockJS('http://54.154.209.2:8080/register')
       this.stompClient = Stomp.over(this.socket)
       this.stompClient.connect({
         'user-id': 'admin'
@@ -122,7 +126,8 @@
           let jsonResp = JSON.parse(resp.body)
           this.newMessage = {
             content: jsonResp.content,
-            origin: 'server'
+            origin: 'server',
+            userId: jsonResp.userId
           }
         })
       })
