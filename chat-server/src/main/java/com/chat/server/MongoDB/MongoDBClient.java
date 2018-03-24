@@ -1,6 +1,7 @@
 package com.chat.server.MongoDB;
 
 import com.chat.server.Message.ChatMessage;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.data.domain.Example;
@@ -20,21 +21,26 @@ public class MongoDBClient implements CommandLineRunner {
   public void run(String... strings) throws Exception {
   }
 
-  public void addNewChatSession(ChatSession chatSession) {
-    chatSessionRepository.save(chatSession);
+  public void addNewUserMessages(UserMessages userMessages) {
+    chatSessionRepository.save(userMessages);
   }
 
-  public void addNewChatMessageToChatSession(String sessionId, ChatMessage chatMessage) {
+  public void addNewChatMessageToUserMessages(String userId, ChatMessage chatMessage) {
     ExampleMatcher matcher = ExampleMatcher.matching()
       .withIgnoreNullValues()
       .withIgnorePaths("messages")
+      .withIgnorePaths("lastMessageDate")
       .withIgnorePaths("id");
-    Optional<ChatSession> chatSession = chatSessionRepository.findOne(
-      Example.of(new ChatSession(sessionId), matcher));
+    Optional<UserMessages> chatSession = chatSessionRepository.findOne(
+      Example.of(new UserMessages(userId), matcher));
     if (chatSession.isPresent()) {
       chatSession.get().addToList(chatMessage);
       chatSessionRepository.save(chatSession.get());
     }
+  }
+  
+  public List<UserMessages> getAllUserMessages() {
+    return chatSessionRepository.findAll();
   }
 
 }

@@ -1,6 +1,7 @@
 package com.chat.server.Controller;
 
 import com.chat.server.Message.ChatMessage;
+import com.chat.server.Translation.YandexTransalteClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -11,11 +12,11 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class AdminController {
 
-  @Autowired
-  private ApplicationContext applicationContext;
+    @Autowired
+    private ApplicationContext applicationContext;
 
-  @Autowired
-  private SimpMessageSendingOperations messageSendingOperations;
+    @Autowired
+    private SimpMessageSendingOperations messageSendingOperations;
 
 //  public String sendToAllConnected(@RequestParam("message") String message) {
 //    List<SessionConnectedEvent> sessionConnectedEvents
@@ -26,10 +27,17 @@ public class AdminController {
 //    });
 //    return "OK";
 //  }
+    @MessageMapping("/admin")
+    public void sendToUser(ChatMessage message, SimpMessageHeaderAccessor headerAccessor) {
+        //pobierz info z mongo
+        
+        String adminSourceLang = "pl";
+        String userTargetLang = "it";
 
-  @MessageMapping("/admin")
-  public void sendToUser(ChatMessage message, SimpMessageHeaderAccessor headerAccessor) {
-    messageSendingOperations.convertAndSend("/topic/private/" + headerAccessor.getNativeHeader("user-id").get(0), message);
-  }
+        //tlumaczymy
+        YandexTransalteClient translator = new YandexTransalteClient(userTargetLang, adminSourceLang);
+        message.setTranslatedContend(translator.traslateString(message.getContent()));
+        messageSendingOperations.convertAndSend("/topic/private/" + headerAccessor.getNativeHeader("user-id").get(0), message);
+    }
 
 }
