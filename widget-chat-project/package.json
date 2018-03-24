@@ -5,7 +5,7 @@
   "author": "MM",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
+    "dev": "cross-env HOST=0.0.0.0 nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@stomp/stompjs": "^4.0.2",
+    "cross-env": "^5.1.4",
     "nuxt": "^1.0.0",
     "sockjs-client": "^1.1.4",
     "uniqid": "^4.1.1"
