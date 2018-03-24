@@ -22,5 +22,9 @@ public class ChatMessage {
     return userId;
   }
   
+  public void setTranslatedContend(String translatedContend) {
+      this.content = translatedContend;
+  }
+  
 
 }
