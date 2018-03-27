@@ -9,18 +9,12 @@ import java.util.Map;
 public abstract class AbstractTranslationClient {
 
   private String targetLanguage;
+  private String sourceLanguage;
 
-  public AbstractTranslationClient(String targetLanguage) {
-    this.targetLanguage = targetLanguage;
-  }
-
-  public String getTargetLanguage() {
-    return targetLanguage;
-  }
-
-  public void setTargetLanguage(String targetLanguage) {
-    this.targetLanguage = targetLanguage;
-  }
-
-  abstract Map<String,String> traslateString(String input);
+    public AbstractTranslationClient(String sourceLanguage ,String targetLanguage ) {
+        this.targetLanguage = targetLanguage;
+        this.sourceLanguage = sourceLanguage;
+    }
+    
+  abstract String traslateString(String input);
 }
