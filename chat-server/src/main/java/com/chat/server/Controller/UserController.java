@@ -5,8 +5,8 @@ import com.chat.server.Message.ChatMessage;
 import com.chat.server.Message.HelloMessage;
 import com.chat.server.MongoDB.MongoDBClient;
 import com.chat.server.MongoDB.UserMessages;
+import com.chat.server.Translation.AbstractDetectorClient;
 import com.chat.server.Translation.YandexDetectorClient;
-import java.util.Map;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -21,6 +21,7 @@ public class UserController {
   private SimpMessageSendingOperations messageSendingOperations;
   @Autowired
   private MongoDBClient mongoDBClient;
+  private final AbstractDetectorClient langDetector =  new YandexDetectorClient();
 
   @MessageMapping("/hello")
   public void hello(HelloMessage message, SimpMessageHeaderAccessor headerAccessor) throws Exception {
@@ -34,9 +35,10 @@ public class UserController {
 
     String adminTargetLang = "pl";
     String userId = headerAccessor.getNativeHeader("user-id").get(0);
+    if (headerAccessor.getNativeHeader("user-id").get(0) == null) throw new IllegalStateException();
+    
     Optional<UserMessages> userMessages = mongoDBClient.getSingleUserMessages(userId);
     YandexTransalteClient translator = null;
-    YandexDetectorClient langDetector = new YandexDetectorClient();
     String translatedMessage = null;
     
 
@@ -44,14 +46,13 @@ public class UserController {
 //      pozyskiwanie z przegladarki dla potwierdzenia kiedys?
 //    String userBrowserLang = headerAccessor.getNativeHeader("browser-lang").get(0);
       
-      String userLanguage = userMessages.get().getLanguage();
-      translator = new YandexTransalteClient(userLanguage, adminTargetLang);
+      translator = new YandexTransalteClient(userMessages.get().getLanguage(), adminTargetLang);
       translatedMessage = translator.traslateString(message.getContent());
     } else {
-      langDetector.detect(message.getContent());
-      translator = new YandexTransalteClient(langDetector.getDetectedLanguage(), adminTargetLang);
+      this.langDetector.detect(message.getContent());
+      translator = new YandexTransalteClient(this.langDetector.getDetectedLanguage(), adminTargetLang);
       translatedMessage = translator.traslateString(message.getContent());
-      mongoDBClient.setUserLanguage(userId, langDetector.getDetectedLanguage());
+      mongoDBClient.setUserLanguage(userId, this.langDetector.getDetectedLanguage());
     }
 
     ChatMessage chatMessage = new ChatMessage(

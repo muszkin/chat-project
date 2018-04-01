@@ -16,5 +16,5 @@ public abstract class AbstractDetectorClient {
         this.detectedLanguage = detectedLanguage;
     }
     
-    abstract void detect (String input);
+    public abstract void detect (String input);
 }
